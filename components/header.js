@@ -7,30 +7,31 @@ import { View,
          ScrollView,
          ActivityIndicator,
 } from 'react-native';
+import { IconButton, Colors } from 'react-native-paper';
+
 
 export default function App(){
 
   return(
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.container}>
+    <SafeAreaView>
         <StatusBar backgroundColor="#032639"/>
         <View style={styles.Appbar}>
-          <Text>Superintel</Text>
+        <IconButton
+          icon="menu"
+          color={Colors.white}
+          size={25}
+          onPress={() => console.log('Pressed')}
+        />
         </View>
         <View style={styles.fundocardtop}>
         <View style={styles.cardTop}>
           <Text style={styles.nomeRede}>Casa Fiesta</Text>
         </View>
-        </View>
-      </ScrollView> 
+        </View> 
     </SafeAreaView>
   )
 }
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    backgroundColor: '#EEEEEE',
-  },
   Appbar:{
     backgroundColor: "#032639",
     height: 55,
