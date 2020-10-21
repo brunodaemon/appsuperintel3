@@ -10,7 +10,7 @@ import { View,
 import { IconButton, Colors } from 'react-native-paper';
 
 
-export default function App(){
+export default function Navbar(props){
 
   return(
     <SafeAreaView>
