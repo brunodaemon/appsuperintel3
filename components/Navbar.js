@@ -12,6 +12,9 @@ import { IconButton, Colors } from 'react-native-paper';
 
 export default function Navbar(props){
 
+  console.log(props);
+  let nomeRede = props.nomeRede ? props.nomeRede : ' ';
+
   return(
     <SafeAreaView>
         <StatusBar backgroundColor="#032639"/>
@@ -24,13 +27,14 @@ export default function Navbar(props){
         />
         </View>
         <View style={styles.fundocardtop}>
-        <View style={styles.cardTop}>
-          <Text style={styles.nomeRede}>Casa Fiesta</Text>
-        </View>
+          <View View style={styles.cardTop}>
+            <Text style={styles.nomeRede}>{nomeRede}</Text>
+          </View>
         </View> 
     </SafeAreaView>
   )
 }
+
 const styles = StyleSheet.create({
   Appbar:{
     backgroundColor: "#032639",

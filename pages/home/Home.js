@@ -181,9 +181,12 @@ const styles = StyleSheet.create({
   });
 
 export default function Home() {
+
+    let nomeRede = `Casa Fiesta`
+
     return(
         <SafeAreaView style={styles.container}>
-          <Navbar style={styles.Navbar}/>
+          <Navbar nomeRede={nomeRede} style={styles.Navbar}/>
           <ScrollView style={styles.containerscroll}>
             <View style={styles.Sessao}>
               <Text style={styles.nomesessao}>
