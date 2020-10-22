@@ -1,7 +1,7 @@
 import React from 'react'
 import { StackedBarChart } from 'react-native-svg-charts'
  
-class Participacaotrocas extends React.PureComponent {
+class Participacaofaturamento extends React.PureComponent {
     render() {
         const data = [
             {
@@ -14,7 +14,7 @@ class Participacaotrocas extends React.PureComponent {
 
         ]
  
-        const colors = ['#021017', '#153354', '#175A9C', '#3883C9',  '#C5C5C5']
+        const colors = ['#021704', '#15541D', '#179C32', '#00E152',  '#C5C5C5']
         const keys = ['lojaum', 'lojadois', 'lojatres', 'lojaquatro', 'outros']
  
         return (
@@ -31,4 +31,4 @@ class Participacaotrocas extends React.PureComponent {
     }
 }
 
-export default Participacaotrocas
+export default Participacaofaturamento

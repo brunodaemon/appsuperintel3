@@ -28,7 +28,7 @@ class PieChartWithDifferentArcs extends React.PureComponent {
         return (
             <PieChart
                 style={{ flex:1 }}
-                outerRadius={'100%'}
+                outerRadius={'99%'}
                 innerRadius={40}
                 data={data}
                 padAngle={0}

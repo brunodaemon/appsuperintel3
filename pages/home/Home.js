@@ -10,6 +10,9 @@ import Navbar from '../../components/Navbar';
 import { Button, Colors } from 'react-native-paper';
 import Totaltrocas from './../../components/Totaltrocas';
 import Participacaotrocas from  './../../components/Participacaotrocas';
+import Participacaoperdas from  './../../components/Participacaoperdas';
+import Participacaofaturamento from  './../../components/Participacaofaturamento';
+import Percentualfaturamento from  './../../components/Percentualfaturamento';
 
 
 const styles = StyleSheet.create({
@@ -38,6 +41,13 @@ const styles = StyleSheet.create({
       color: '#FFF',
       marginLeft: 20,
       marginTop: 10
+    },
+    variacao:{
+      fontSize: 25,
+      fontWeight: 'bold',
+      color: '#032639',
+      marginLeft: 0,
+      marginTop: 0,
     },
     titulomotivo:{
       fontSize: 16,
@@ -79,12 +89,19 @@ const styles = StyleSheet.create({
       color: '#032639',
       marginTop: 4.5,
       marginRight: 3,
-      marginLeft: 20,
+      marginLeft: 18,
     },
     valortroca:{
       fontSize: 20,
       color: '#032639',
       fontWeight: 'bold',
+    },
+    grafico2:{
+      backgroundColor: '#FFF',
+      marginTop: 5,
+      height: 150,
+      marginBottom: 0,
+      borderRadius: 10,
     },
     grafico:{
       backgroundColor: '#FFF',
@@ -167,16 +184,34 @@ const styles = StyleSheet.create({
       padding: 20,
     },
     circulo1:{
-      marginTop:-10,
-      marginLeft: -20,
-      marginBottom:-20,
-      marginRight:-25,
+      marginTop:2,
+      marginLeft: 0,
+      marginBottom:0,
+      marginRight:5,
+      height: 12,
+      width:12,
+      borderRadius:12,
+      backgroundColor: '#1A4069',
     },
     circulo2:{
-      marginTop:-5,
-      marginLeft: -20,
-      marginBottom:-20,
-      marginRight:-25,
+      marginTop:8,
+      marginLeft: 0,
+      marginBottom:0,
+      marginRight:5,
+      height: 12,
+      width:12,
+      borderRadius:12,
+      backgroundColor: '#00E152',
+    },
+    circulo3:{
+      marginTop:2,
+      marginLeft: 0,
+      marginBottom:0,
+      marginRight:5,
+      height: 12,
+      width:12,
+      borderRadius:12,
+      backgroundColor: '#3883C9',
     },
   });
 
@@ -234,6 +269,12 @@ export default function Home() {
               <Text style={styles.titulocard}>
                 Variação Percentual Faturamento
               </Text>
+              <Text style={styles.variacao}>
+                1,18%
+              </Text>
+              <View style={styles.grafico2}>
+                <Percentualfaturamento/>
+              </View>
               
             </View>
     
@@ -244,7 +285,9 @@ export default function Home() {
               <Text style={styles.subtitulo}>
                 no faturamento total semanal
               </Text>
-              <View style={styles.grafico}></View>
+              <View style={styles.grafico}>
+                <Participacaofaturamento/>
+              </View>
             </View>
     
             <View style={{flex: 1, flexDirection: 'row'}}>
@@ -336,7 +379,9 @@ export default function Home() {
               <Text style={styles.subtitulo}>
                 nas perdas totais semanais
               </Text>
-              <View style={styles.grafico}></View>
+              <View style={styles.grafico}>
+                <Participacaoperdas/>
+              </View>
             </View>
     
             <View style={styles.Sessao}>
@@ -396,7 +441,7 @@ export default function Home() {
                 Lixo Indenizado
               </Text>
               <View style={{flexDirection: 'row'}}>
-              <Button icon="circle" style={styles.circulo1} color={Colors.blue900}/>
+              <View style={styles.circulo1}/>
               <Text style={styles.subtitulo}>
                 Bonificação
               </Text>
@@ -410,7 +455,7 @@ export default function Home() {
               </Text>
               </View>
               <View style={{flexDirection: 'row'}}>
-              <Button icon="circle" style={styles.circulo2} color={Colors.green400}/>
+              <View style={styles.circulo2}/>
               <Text style={styles.subtitulo3}>
                 Depósito
               </Text>
@@ -427,7 +472,7 @@ export default function Home() {
                 Devolução
               </Text>
               <View style={{flexDirection: 'row'}}>
-              <Button icon="circle" style={styles.circulo1} color={Colors.blueA200}/>
+              <View style={styles.circulo3}/>
               <Text style={styles.subtitulo}>
                 Boleto
               </Text>
