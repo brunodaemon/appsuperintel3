@@ -4,7 +4,7 @@ import { View } from 'react-native'
  
 class Percentualfaturamento extends React.PureComponent {
     render() {
-        const data = [5000, 5600, 5100, 5300, 5000, 6000]
+        const data = [5200, 5090, 5100, 5300, 5200, 5400, 5450,]
  
         const contentInset = { top: 8, bottom:8 }
  

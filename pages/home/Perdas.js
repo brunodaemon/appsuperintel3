@@ -4,7 +4,8 @@ import { View,
          StyleSheet, 
          SafeAreaView, 
 } from 'react-native';
-import Participacaoperdas from  './../../components/Participacaoperdas';
+import Participacaoperdas from  '../../components/Graficos/Participacaoperdas';
+import Listalojas from  '../../components/Tabelas/Participacaoperdas';
 
 
 const styles = StyleSheet.create({
@@ -68,10 +69,15 @@ const styles = StyleSheet.create({
     card8:{
       backgroundColor: "#FFF",
       borderRadius: 10,
-      height: 340,
+      height: 350,
       marginTop: 15,
       marginBottom: 15,
       padding: 20,
+    },
+    tabela:{
+        marginLeft: -20,
+        marginRight:-20,
+        height: 60,
     },
   });
 
@@ -127,13 +133,16 @@ export default function Perdas() {
     
             <View style={styles.card8}>
               <Text style={styles.titulocard}>
-                Perticipação das Lojas
+                Participação das Lojas
               </Text>
               <Text style={styles.subtitulo}>
                 nas perdas totais semanais
               </Text>
               <View style={styles.grafico}>
                 <Participacaoperdas/>
+              </View>
+              <View style={styles.tabela}>
+                 <Listalojas/> 
               </View>
             </View>
 

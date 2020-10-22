@@ -4,8 +4,9 @@ import { View,
          StyleSheet, 
          SafeAreaView, 
 } from 'react-native';
-import Totaltrocas from './../../components/Totaltrocas';
-import Participacaotrocas from  './../../components/Participacaotrocas';
+import Totaltrocas from '../../components/Graficos/Totaltrocas';
+import Participacaotrocas from  '../../components/Graficos/Participacaotrocas';
+import Listalojas from  '../../components/Tabelas/Participacaotrocas';
 
 
 
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
     card7:{
       backgroundColor: "#FFF",
       borderRadius: 10,
-      height: 340,
+      height: 350,
       marginTop: 15,
       marginBottom: 30,
       padding: 20,
@@ -133,6 +134,11 @@ const styles = StyleSheet.create({
       width:12,
       borderRadius:12,
       backgroundColor: '#3883C9',
+    },
+    tabela:{
+        marginLeft: -20,
+        marginRight:-20,
+        height: 60,
     },
   });
 
@@ -256,13 +262,16 @@ export default function Trocas() {
     
             <View style={styles.card7}>
               <Text style={styles.titulocard}>
-                Perticipação das Lojas
+                Participação das Lojas
               </Text>
               <Text style={styles.subtitulo}>
                 nas trocas totais semanais
               </Text>
               <View style={styles.grafico}>
                 <Participacaotrocas/>
+              </View>
+              <View style={styles.tabela}>
+                 <Listalojas/> 
               </View>
             </View>
  

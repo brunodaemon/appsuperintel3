@@ -4,8 +4,9 @@ import { View,
          StyleSheet, 
          SafeAreaView, 
 } from 'react-native';
-import Participacaofaturamento from  './../../components/Participacaofaturamento';
-import Percentualfaturamento from  './../../components/Percentualfaturamento';
+import Participacaofaturamento from  '../../components/Graficos/Participacaofaturamento';
+import Percentualfaturamento from  '../../components/Graficos/Percentualfaturamento';
+import Listalojas from  '../../components/Tabelas/Participacaofaturamento';
 
 
 const styles = StyleSheet.create({
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     card3:{
       backgroundColor: "#FFF",
       borderRadius: 10,
-      height: 340,
+      height: 350,
       marginTop: 15,
       padding: 20,
     },
@@ -106,6 +107,11 @@ const styles = StyleSheet.create({
       marginLeft: 15,
       padding: 20,
       flex: 1,
+    },
+    tabela:{
+        marginLeft: -20,
+        marginRight:-20,
+        height: 60,
     },
 
   });
@@ -172,13 +178,16 @@ export default function Faturamento() {
     
             <View style={styles.card3}>
               <Text style={styles.titulocard}>
-                Perticipação das Lojas
+                Participação das Lojas
               </Text>
               <Text style={styles.subtitulo}>
                 no faturamento total semanal
               </Text>
               <View style={styles.grafico}>
                 <Participacaofaturamento/>
+              </View>
+              <View style={styles.tabela}>
+                 <Listalojas/> 
               </View>
             </View>
     
