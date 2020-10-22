@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     barra:{
-        width: 40,
+        width: 50,
         height: 32,
         justifyContent: 'center',
     },
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     view2:{
-        width: 130,
+        width: 120,
         height: 32,
         justifyContent: 'center',
     },
@@ -32,41 +32,42 @@ const styles = StyleSheet.create({
     texto:{
         fontSize: 15,
         color:'#032639',
+        
     },
     icone:{
         height: 10,
         width: 20,
         borderRadius: 10,
         backgroundColor: '#D61D00',
-        marginLeft: 10,
+        marginLeft: 20,
     },
     icone2:{
         height: 10,
         width: 20,
         borderRadius: 10,
         backgroundColor: '#FF7700',
-        marginLeft: 10,
+        marginLeft: 20,
     },
     icone3:{
         height: 10,
         width: 20,
         borderRadius: 10,
         backgroundColor: '#FFA200',
-        marginLeft: 10,
+        marginLeft: 20,
     },
     icone4:{
         height: 10,
         width: 20,
         borderRadius: 10,
         backgroundColor: '#F9DC1F',
-        marginLeft: 10,
+        marginLeft: 20,
     },
     icone5:{
         height: 10,
         width: 20,
         borderRadius: 10,
         backgroundColor: '#C5C5C5',
-        marginLeft: 10,
+        marginLeft: 20,
     },
 
 

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, } from 'react-native';
 import { Divider } from 'react-native-paper';
+import { useFonts } from 'expo-font';
+import { AppLoading } from 'expo';
 
 
 const styles = StyleSheet.create({
@@ -10,7 +12,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     barra:{
-        width: 40,
+        width: 50,
         height: 32,
         justifyContent: 'center',
     },
@@ -20,7 +22,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     view2:{
-        width: 130,
+        width: 120,
         height: 32,
         justifyContent: 'center',
     },
@@ -32,47 +34,57 @@ const styles = StyleSheet.create({
     texto:{
         fontSize: 15,
         color:'#032639',
+        fontFamily: 'TitilliumWeb',
     },
     icone:{
         height: 10,
         width: 20,
         borderRadius: 10,
         backgroundColor: '#021017',
-        marginLeft: 10,
+        marginLeft: 20,
     },
     icone2:{
         height: 10,
         width: 20,
         borderRadius: 10,
         backgroundColor: '#153354',
-        marginLeft: 10,
+        marginLeft: 20,
     },
     icone3:{
         height: 10,
         width: 20,
         borderRadius: 10,
         backgroundColor: '#175A9C',
-        marginLeft: 10,
+        marginLeft: 20,
     },
     icone4:{
         height: 10,
         width: 20,
         borderRadius: 10,
         backgroundColor: '#3883C9',
-        marginLeft: 10,
+        marginLeft: 20,
     },
     icone5:{
         height: 10,
         width: 20,
         borderRadius: 10,
         backgroundColor: '#C5C5C5',
-        marginLeft: 10,
+        marginLeft: 20,
     },
 
 
 });
 
-const Participacaoperdas = () => (
+export default props => {
+    let [fontsLoaded] = useFonts({
+      'TitilliumWeb': require('../../assets/fonts/TitilliumWeb-Regular.ttf'),
+    });
+  
+    if (!fontsLoaded) {
+      return <AppLoading />;
+    } else {
+
+    return (
   <View style={styles.container}>
     <View style={{flexDirection: 'row'}}>
         <View style={styles.barra}><View style={styles.icone}/></View>
@@ -208,6 +220,8 @@ const Participacaoperdas = () => (
     </View>
     <Divider />
   </View>
-);
+)
 
-export default Participacaoperdas;
+}
+
+};
