@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     view:{
-        width: 170,
+        width: 160,
         height: 32,
         justifyContent: 'center',
     },

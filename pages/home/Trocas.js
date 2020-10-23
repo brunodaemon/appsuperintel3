@@ -94,6 +94,13 @@ const styles = StyleSheet.create({
       marginRight: -10,
       borderRadius: 10,
     },
+    card1:{
+      backgroundColor: "#FFF",
+      borderRadius: 10,
+      height: 100,
+      marginTop: -15,
+      padding: 20,
+    },
     card6:{
       backgroundColor: "#FFF",
       borderRadius: 10,
@@ -172,12 +179,12 @@ export default function Trocas() {
         <SafeAreaView style={styles.container}>
     
     
-            <View style={styles.Sessao}>
+    <View style={styles.Sessao}>
               <Text style={styles.nomesessao}>
                 Trocas
               </Text>
             </View>
-            <View style={styles.card6}>
+            <View style={styles.card1}>
               <Text style={styles.titulocard}>
                 Total Rede
               </Text>
@@ -195,7 +202,10 @@ export default function Trocas() {
                 340.256,25
               </Text>
               </View>
-              <Text style={styles.subtitulo2}>
+              </View>
+    
+              <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
+              <Text style={styles.subtitulo}>
                 últimos 35 dias
               </Text>
               <View style={{flexDirection: 'row'}}>
@@ -206,10 +216,6 @@ export default function Trocas() {
                 1.245.369,01
               </Text>
               </View>
-              </View>
-    
-              <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
-                
               </View>
     
               </View>

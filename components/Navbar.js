@@ -10,6 +10,8 @@ import { View,
 import { IconButton, Colors } from 'react-native-paper';
 import { useFonts } from 'expo-font';
 import { AppLoading } from 'expo';
+import { Svg } from 'react-native-svg';
+import Logo from '../assets/icones/Logo';
 
 
 export default function Navbar(props){
@@ -29,12 +31,19 @@ export default function Navbar(props){
     <SafeAreaView>
         <StatusBar backgroundColor="#032639"/>
         <View style={styles.Appbar}>
+        <View style={{flex: 1, flexDirection: 'row'}}>
         <IconButton
           icon="menu"
           color={Colors.white}
           size={25}
           onPress={() => console.log('Pressed')}
         />
+        <Svg>
+        <View style={styles.logo}>
+
+        </View>
+        </Svg>
+        </View>
         </View>
         <View style={styles.fundocardtop}>
           <View View style={styles.cardTop}>
@@ -68,5 +77,10 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     color: "#032639",
     fontFamily: 'TitilliumWebBold',
-  }
+  },
+  logo:{
+    height: 55,
+    width: 290,
+    justifyContent: 'center',
+  },
 });
