@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, } from 'react-native';
 import { Divider } from 'react-native-paper';
+import { useFonts } from 'expo-font';
+import { AppLoading } from 'expo';
 
 
 const styles = StyleSheet.create({
@@ -32,7 +34,7 @@ const styles = StyleSheet.create({
     texto:{
         fontSize: 15,
         color:'#032639',
-        
+        fontFamily: 'TitilliumWeb',
     },
     icone:{
         height: 10,
@@ -73,7 +75,16 @@ const styles = StyleSheet.create({
 
 });
 
-const Participacaofaturamento = () => (
+export default props => {
+    let [fontsLoaded] = useFonts({
+      'TitilliumWeb': require('../../assets/fonts/TitilliumWeb-Regular.ttf'),
+    });
+  
+    if (!fontsLoaded) {
+      return <AppLoading />;
+    } else {
+
+    return (
   <View style={styles.container}>
     <View style={{flexDirection: 'row'}}>
         <View style={styles.barra}><View style={styles.icone}/></View>
@@ -209,6 +220,8 @@ const Participacaofaturamento = () => (
     </View>
     <Divider />
   </View>
-);
+)
 
-export default Participacaofaturamento;
+}
+
+};

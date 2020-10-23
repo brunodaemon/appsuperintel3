@@ -7,6 +7,9 @@ import { View,
 import Participacaofaturamento from  '../../components/Graficos/Participacaofaturamento';
 import Percentualfaturamento from  '../../components/Graficos/Percentualfaturamento';
 import Listalojas from  '../../components/Tabelas/Participacaofaturamento';
+import { useFonts } from 'expo-font';
+import { AppLoading } from 'expo';
+
 
 
 const styles = StyleSheet.create({
@@ -20,37 +23,41 @@ const styles = StyleSheet.create({
       height: 55,
     },
     nomesessao:{
-      fontSize: 17,
+      fontSize: 18,
       color: '#FFF',
       marginLeft: 20,
-      marginTop: 10
+      marginTop: 8,
+      fontFamily: 'TitilliumWeb',
     },
     variacao:{
-      fontSize: 25,
-      fontWeight: 'bold',
+      fontSize: 26,
       color: '#032639',
       marginLeft: 0,
       marginTop: 0,
+      fontFamily: 'TitilliumWebBold',
     },
     titulocard:{
-      fontSize: 17,
+      fontSize: 18,
       color: '#707070',
-      marginTop: -5,
+      marginTop: -8,
+      fontFamily: 'TitilliumWeb',
     },
     subtitulo:{
-      fontSize: 12,
+      fontSize: 13,
       color: '#707070',
+      fontFamily: 'TitilliumWeb',
     },
     R$:{
-      fontSize: 16,
+      fontSize: 17,
       color: '#032639',
       marginTop: 4.5,
       marginRight: 3,
+      fontFamily: 'TitilliumWebLight',
     },
     valor:{
-      fontSize: 20,
+      fontSize: 21,
       color: '#032639',
-      fontWeight: 'bold',
+      fontFamily: 'TitilliumWebBold',
     },
     grafico2:{
       backgroundColor: '#FFF',
@@ -117,6 +124,16 @@ const styles = StyleSheet.create({
   });
 
 export default function Faturamento() {
+
+  let [fontsLoaded] = useFonts({
+    'TitilliumWeb': require('../../assets/fonts/TitilliumWeb-Regular.ttf'),
+    'TitilliumWebBold': require('../../assets/fonts/TitilliumWeb-Bold.ttf'),
+    'TitilliumWebLight': require('../../assets/fonts/TitilliumWeb-Light.ttf'),
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
 
 
     return(
@@ -234,3 +251,4 @@ export default function Faturamento() {
       )
 
 }
+};

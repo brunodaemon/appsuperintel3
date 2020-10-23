@@ -8,12 +8,22 @@ import { View,
          ActivityIndicator,
 } from 'react-native';
 import { IconButton, Colors } from 'react-native-paper';
+import { useFonts } from 'expo-font';
+import { AppLoading } from 'expo';
 
 
 export default function Navbar(props){
 
   console.log(props);
   let nomeRede = props.nomeRede ? props.nomeRede : ' ';
+
+    let [fontsLoaded] = useFonts({
+      'TitilliumWebBold': require('../assets/fonts/TitilliumWeb-Bold.ttf'),
+    });
+  
+    if (!fontsLoaded) {
+      return <AppLoading />;
+    } else {
 
   return(
     <SafeAreaView>
@@ -34,6 +44,7 @@ export default function Navbar(props){
     </SafeAreaView>
   )
 }
+};
 
 const styles = StyleSheet.create({
   Appbar:{
@@ -54,8 +65,8 @@ const styles = StyleSheet.create({
   },
   nomeRede:{
     fontSize: 26,
-    fontWeight: 'bold',
     marginLeft: 20,
     color: "#032639",
+    fontFamily: 'TitilliumWebBold',
   }
 });

@@ -6,6 +6,9 @@ import { View,
 } from 'react-native';
 import Participacaoperdas from  '../../components/Graficos/Participacaoperdas';
 import Listalojas from  '../../components/Tabelas/Participacaoperdas';
+import { useFonts } from 'expo-font';
+import { AppLoading } from 'expo';
+
 
 
 const styles = StyleSheet.create({
@@ -19,35 +22,40 @@ const styles = StyleSheet.create({
       height: 55,
     },
     nomesessao:{
-      fontSize: 17,
+      fontSize: 18,
       color: '#FFF',
       marginLeft: 20,
-      marginTop: 10
+      marginTop: 8,
+      fontFamily: 'TitilliumWeb',
     },
     titulocard:{
-      fontSize: 17,
+      fontSize: 18,
       color: '#707070',
-      marginTop: -5,
+      marginTop: -8,
+      fontFamily: 'TitilliumWeb',
     },
     subtitulo:{
-      fontSize: 12,
+      fontSize: 13,
       color: '#707070',
+      fontFamily: 'TitilliumWeb',
     },
     subtitulo2:{
-      fontSize: 12,
+      fontSize: 13,
       color: '#707070',
       marginTop: 14,
+      fontFamily: 'TitilliumWeb',
     },
     R$:{
-      fontSize: 16,
+      fontSize: 17,
       color: '#032639',
       marginTop: 4.5,
       marginRight: 3,
+      fontFamily: 'TitilliumWebLight',
     },
     valor:{
-      fontSize: 20,
+      fontSize: 21,
       color: '#032639',
-      fontWeight: 'bold',
+      fontFamily: 'TitilliumWebBold',
     },
     grafico:{
       backgroundColor: '#FFF',
@@ -84,6 +92,16 @@ const styles = StyleSheet.create({
 export default function Perdas() {
 
     let nomeRede = `Casa Fiesta`
+
+    let [fontsLoaded] = useFonts({
+      'TitilliumWeb': require('../../assets/fonts/TitilliumWeb-Regular.ttf'),
+      'TitilliumWebBold': require('../../assets/fonts/TitilliumWeb-Bold.ttf'),
+      'TitilliumWebLight': require('../../assets/fonts/TitilliumWeb-Light.ttf'),
+    });
+  
+    if (!fontsLoaded) {
+      return <AppLoading />;
+    } else {
 
     return(
         <SafeAreaView style={styles.container}>
@@ -150,3 +168,4 @@ export default function Perdas() {
       )
 
 }
+};
