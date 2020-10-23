@@ -9,6 +9,7 @@ import Percentualfaturamento from  '../../components/Graficos/Percentualfaturame
 import Listalojas from  '../../components/Tabelas/Participacaofaturamento';
 import { useFonts } from 'expo-font';
 import { AppLoading } from 'expo';
+import { Card } from 'react-native-paper';
 
 
 
@@ -184,9 +185,12 @@ export default function Faturamento() {
               <Text style={styles.titulocard}>
                 Variação Percentual Faturamento
               </Text>
+              <View style={{flex: 1, flexDirection: 'row'}}>
+              <Card size={60} icon="chevron-up" />
               <Text style={styles.variacao}>
                 1,18%
               </Text>
+              </View>
               <View style={styles.grafico2}>
                 <Percentualfaturamento/>
               </View>
