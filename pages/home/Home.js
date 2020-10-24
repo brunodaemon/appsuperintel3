@@ -6,11 +6,13 @@ import { View,
          StatusBar,
          ScrollView,
 } from 'react-native';
+import NumberFormat from 'react-number-format';
 import Navbar from '../../components/Navbar';
 import { Button, Colors } from 'react-native-paper';
 import Totaltrocas from './../../components/Totaltrocas';
 import Participacaotrocas from  './../../components/Participacaotrocas';
 
+import { Api_GET } from './../../Services/api';
 
 const styles = StyleSheet.create({
     container:{
@@ -180,9 +182,64 @@ const styles = StyleSheet.create({
     },
   });
 
+
+const api_call = (endpoint) => {
+  return Api_GET(endpoint)
+        .then(data => {return data})
+}
+
 export default function Home() {
 
-    let nomeRede = `Casa Fiesta`
+    let nomeRede = `Casa Fiesta`;
+    const [ valoresPerdas, setValoresPerdas ] = React.useState('');
+
+    if(valoresPerdas === '') {
+      api_call(`cardperdas/calendario-perdas-semanais-valores-consolidados/`).then((data) => {
+        let result = data[0].results;
+        
+        var perdas = {
+          compras: 0,
+          vendas: 0,
+          ultimos7dias: 0,
+          ultimos35dias: 0
+        }
+
+        result.forEach((value) => {
+
+          if(value.id === 1) {
+            if(value.operacao === 'PERDAS') perdas.ultimos35dias += parseFloat(value.valor)
+          }
+
+          if(value.id === 2) {
+            if(value.operacao === 'PERDAS') perdas.ultimos35dias += parseFloat(value.valor)
+          }
+
+          if(value.id === 3) {
+            if(value.operacao === 'PERDAS') perdas.ultimos35dias += parseFloat(value.valor)
+          }
+
+          if(value.id === 4) {
+            if(value.operacao === 'PERDAS') perdas.ultimos35dias += parseFloat(value.valor)
+          }
+
+          if(value.id === 5) {
+            if(value.operacao === 'COMPRAS') perdas.compras = parseFloat(value.valor)
+            if(value.operacao === 'VENDAS') perdas.vendas = parseFloat(value.valor)
+            if(value.operacao === 'PERDAS') perdas.ultimos7dias = parseFloat(value.valor)
+            if(value.operacao === 'PERDAS') perdas.ultimos35dias += parseFloat(value.valor)
+          }
+        })
+
+        setValoresPerdas(perdas);
+        console.log(result);
+        console.log(valoresPerdas);
+      }, (error) => {
+        var errorMsg = 'Erro ao buscar os Valores para a tabela';
+        alert(errorMsg);
+        console.log(`${errorMsg} -> `, error);
+        setValoresPerdas('');
+      })
+    }
 
     return(
         <SafeAreaView style={styles.container}>
@@ -246,7 +303,7 @@ export default function Home() {
               </Text>
               <View style={styles.grafico}></View>
             </View>
-    
+            
             <View style={{flex: 1, flexDirection: 'row'}}>
             <View style={styles.card4}>
               <Text style={styles.titulocard}>
@@ -261,7 +318,7 @@ export default function Home() {
                 R$
               </Text>
               <Text style={styles.valor}>
-                1.340.256,25
+                { valoresPerdas.compras !== "" ? <NumberFormat value={valoresPerdas.compras} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> : ' '}
               </Text>
               </View>
               </View>
@@ -279,7 +336,7 @@ export default function Home() {
                 R$
               </Text>
               <Text style={styles.valor}>
-                2.580.612,36
+                { valoresPerdas.vendas !== "" ? <NumberFormat value={valoresPerdas.vendas} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> : ' '}
               </Text>
               </View>
               </View>
@@ -306,7 +363,7 @@ export default function Home() {
                 R$
               </Text>
               <Text style={styles.valor}>
-                340.256,25
+                { valoresPerdas.ultimos7dias !== "" ? <NumberFormat value={valoresPerdas.ultimos7dias} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> : ' '}
               </Text>
               </View>
               <Text style={styles.subtitulo2}>
@@ -317,7 +374,7 @@ export default function Home() {
                 R$
               </Text>
               <Text style={styles.valor}>
-                1.245.369,01
+              { valoresPerdas.ultimos35dias !== "" ? <NumberFormat value={valoresPerdas.ultimos35dias} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> : ' '}
               </Text>
               </View>
               </View>
