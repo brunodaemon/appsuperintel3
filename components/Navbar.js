@@ -11,7 +11,6 @@ import { IconButton, Colors } from 'react-native-paper';
 import { useFonts } from 'expo-font';
 import { AppLoading } from 'expo';
 import { Svg } from 'react-native-svg';
-import Logo from '../assets/icones/Logo';
 
 
 export default function Navbar(props){
