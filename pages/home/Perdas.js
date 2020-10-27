@@ -96,9 +96,15 @@ const styles = StyleSheet.create({
     },
   });
 
-export default function Perdas() {
+export default function Perdas(props) {
 
     let nomeRede = `Casa Fiesta`
+    let valoresPerdas = props.valoresPerdas || {
+      compras: 0,
+      vendas: 0,
+      ultimos7dias: 0,
+      ultimos35dias: 0
+    }
 
     let [fontsLoaded] = useFonts({
       'TitilliumWeb': require('../../assets/fonts/TitilliumWeb-Regular.ttf'),
@@ -133,7 +139,7 @@ export default function Perdas() {
                 R$
               </Text>
               <Text style={styles.valor}>
-                340.256,25
+                { valoresPerdas.ultimos7dias }
               </Text>
               </View>
               </View>
@@ -147,7 +153,7 @@ export default function Perdas() {
                 R$
               </Text>
               <Text style={styles.valor}>
-                1.245.369,01
+                { valoresPerdas.ultimos35dias }
               </Text>
               </View>
               </View>

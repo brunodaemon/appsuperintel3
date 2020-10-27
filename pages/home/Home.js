@@ -92,9 +92,9 @@ export default function Home() {
         <SafeAreaView style={styles.container}>
           <Navbar nomeRede={nomeRede} style={styles.Navbar}/>
           <ScrollView style={styles.containerscroll}>
-            <Faturamento/>
-            <Perdas/>
-            <Trocas/>
+            <Faturamento valoresPerdas={valoresPerdas}/>
+            <Perdas valoresPerdas={valoresPerdas}/>
+            <Trocas />
           </ScrollView>
         </SafeAreaView>
       )

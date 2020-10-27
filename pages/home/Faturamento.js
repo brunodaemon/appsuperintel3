@@ -124,7 +124,14 @@ const styles = StyleSheet.create({
 
   });
 
-export default function Faturamento() {
+export default function Faturamento(props) {
+  
+  let valoresPerdas = props.valoresPerdas || {
+    compras: 0,
+    vendas: 0,
+    ultimos7dias: 0,
+    ultimos35dias: 0
+  }
 
   let [fontsLoaded] = useFonts({
     'TitilliumWeb': require('../../assets/fonts/TitilliumWeb-Regular.ttf'),
@@ -226,7 +233,7 @@ export default function Faturamento() {
                 R$
               </Text>
               <Text style={styles.valor}>
-                1.340.256,25
+                { valoresPerdas.compras }
               </Text>
               </View>
               </View>
@@ -244,7 +251,7 @@ export default function Faturamento() {
                 R$
               </Text>
               <Text style={styles.valor}>
-                2.580.612,36
+                { valoresPerdas.vendas }
               </Text>
               </View>
               </View>
