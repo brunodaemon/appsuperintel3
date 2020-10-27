@@ -39,6 +39,7 @@ export default function Home() {
 
     let nomeRede = `Casa Fiesta`;
     const [ valoresPerdas, setValoresPerdas ] = React.useState('');
+    const [ valoresTrocas, setValoresTrocas ] = React.useState('');
 
     if(valoresPerdas === '') {
       api_call(`cardperdas/calendario-perdas-semanais-valores-consolidados/`).then((data) => {
@@ -88,13 +89,52 @@ export default function Home() {
       })
     }
 
+    if(valoresTrocas === '') {     
+      var trocas = {
+        ultimos7dias: 0,
+        ultimos35dias: 0,
+        lixoIndenizado: {
+          bonificacao: 0,
+          deposito: 0
+        },
+        devolucao: {
+          boleto: 0
+        }
+      }
+
+      api_call(`cardtrocas/tfcard/`).then((data) => {
+        let result = data[0].results;
+
+        result.forEach((value) => {
+          if(value.id === 1) {
+            trocas.ultimos7dias = value.valortrocas;
+            // 7 dias
+          }
+
+          if(value.id === 2) {
+            trocas.ultimos35dias = value.valortrocas;
+            // 35 Dias
+          };
+        })
+
+        setValoresTrocas(trocas);
+        console.log(result);
+        console.log(valoresTrocas);
+      }, (error) => {
+        var errorMsg = 'Erro ao buscar os Valores para a tabela';
+        alert(errorMsg);
+        console.log(`${errorMsg} -> `, error);
+        setValoresTrocas('');
+      })
+    }
+
     return(
         <SafeAreaView style={styles.container}>
           <Navbar nomeRede={nomeRede} style={styles.Navbar}/>
           <ScrollView style={styles.containerscroll}>
             <Faturamento valoresPerdas={valoresPerdas}/>
             <Perdas valoresPerdas={valoresPerdas}/>
-            <Trocas />
+            <Trocas valoresTrocas={valoresTrocas}/>
           </ScrollView>
         </SafeAreaView>
       )

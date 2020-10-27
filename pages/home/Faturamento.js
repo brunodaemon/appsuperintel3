@@ -10,6 +10,7 @@ import Listalojas from  '../../components/Tabelas/Participacaofaturamento';
 import { useFonts } from 'expo-font';
 import { AppLoading } from 'expo';
 import { Card } from 'react-native-paper';
+import NumberFormat from 'react-number-format';
 
 
 
@@ -233,7 +234,7 @@ export default function Faturamento(props) {
                 R$
               </Text>
               <Text style={styles.valor}>
-                { valoresPerdas.compras }
+                <NumberFormat value={ valoresPerdas.compras } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
               </Text>
               </View>
               </View>
@@ -251,7 +252,7 @@ export default function Faturamento(props) {
                 R$
               </Text>
               <Text style={styles.valor}>
-                { valoresPerdas.vendas }
+                <NumberFormat value={ valoresPerdas.vendas } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
               </Text>
               </View>
               </View>

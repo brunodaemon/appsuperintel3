@@ -8,6 +8,7 @@ import Participacaoperdas from  '../../components/Graficos/Participacaoperdas';
 import Listalojas from  '../../components/Tabelas/Participacaoperdas';
 import { useFonts } from 'expo-font';
 import { AppLoading } from 'expo';
+import NumberFormat from 'react-number-format';
 
 
 
@@ -98,7 +99,6 @@ const styles = StyleSheet.create({
 
 export default function Perdas(props) {
 
-    let nomeRede = `Casa Fiesta`
     let valoresPerdas = props.valoresPerdas || {
       compras: 0,
       vendas: 0,
@@ -139,7 +139,7 @@ export default function Perdas(props) {
                 R$
               </Text>
               <Text style={styles.valor}>
-                { valoresPerdas.ultimos7dias }
+                <NumberFormat value={ valoresPerdas.ultimos7dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
               </Text>
               </View>
               </View>
@@ -153,7 +153,7 @@ export default function Perdas(props) {
                 R$
               </Text>
               <Text style={styles.valor}>
-                { valoresPerdas.ultimos35dias }
+                <NumberFormat value={ valoresPerdas.ultimos35dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
               </Text>
               </View>
               </View>

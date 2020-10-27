@@ -10,8 +10,7 @@ import Listalojas from  '../../components/Tabelas/Participacaotrocas';
 import { useFonts } from 'expo-font';
 import { AppLoading } from 'expo';
 
-
-
+import NumberFormat from 'react-number-format';
 
 const styles = StyleSheet.create({
     container:{
@@ -161,9 +160,19 @@ const styles = StyleSheet.create({
     },
   });
 
-export default function Trocas() {
+export default function Trocas(props) {
 
-    let nomeRede = `Casa Fiesta`
+    let valoresTrocas = props.valoresTrocas || {
+      ultimos7dias: 0,
+      ultimos35dias: 0,
+      lixoIndenizado: {
+        bonificacao: 0,
+        deposito: 0
+      },
+      devolucao: {
+        boleto: 0
+      }
+    }
 
     let [fontsLoaded] = useFonts({
       'TitilliumWeb': require('../../assets/fonts/TitilliumWeb-Regular.ttf'),
@@ -199,7 +208,7 @@ export default function Trocas() {
                 R$
               </Text>
               <Text style={styles.valor}>
-                340.256,25
+                <NumberFormat value={ valoresTrocas.ultimos7dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
               </Text>
               </View>
               </View>
@@ -213,7 +222,7 @@ export default function Trocas() {
                 R$
               </Text>
               <Text style={styles.valor}>
-                1.245.369,01
+                <NumberFormat value={ valoresTrocas.ultimos35dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
               </Text>
               </View>
               </View>
@@ -245,7 +254,7 @@ export default function Trocas() {
                 R$
               </Text>
               <Text style={styles.valortroca}>
-                40.256,25
+                <NumberFormat value={ valoresTrocas.lixoIndenizado.bonificacao } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
               </Text>
               </View>
               <View style={{flexDirection: 'row'}}>
@@ -259,7 +268,7 @@ export default function Trocas() {
                 R$
               </Text>
               <Text style={styles.valortroca}>
-                45.369,01
+                <NumberFormat value={ valoresTrocas.lixoIndenizado.deposito } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
               </Text>
               </View>
               <Text style={styles.titulomotivo}>
@@ -276,7 +285,7 @@ export default function Trocas() {
                 R$
               </Text>
               <Text style={styles.valortroca}>
-                250.256,25
+                <NumberFormat value={ valoresTrocas.devolucao.boleto } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
               </Text>
               </View>
               </View>
