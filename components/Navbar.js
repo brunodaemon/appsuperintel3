@@ -6,11 +6,11 @@ import { View,
          StatusBar,
          ScrollView,
          ActivityIndicator,
+         Image,
 } from 'react-native';
 import { IconButton, Colors } from 'react-native-paper';
 import { useFonts } from 'expo-font';
 import { AppLoading } from 'expo';
-import { Svg } from 'react-native-svg';
 
 
 export default function Navbar(props){
@@ -37,11 +37,10 @@ export default function Navbar(props){
           size={25}
           onPress={() => console.log('Pressed')}
         />
-        <Svg>
-        <View style={styles.logo}>
-
-        </View>
-        </Svg>
+        <Image
+        style={styles.logo}
+        source={require('../assets/icones/superintel_branco.png')}
+        />
         </View>
         </View>
         <View style={styles.fundocardtop}>
@@ -78,8 +77,10 @@ const styles = StyleSheet.create({
     fontFamily: 'TitilliumWebBold',
   },
   logo:{
-    height: 55,
-    width: 290,
+    height: 16,
+    width: 190,
+    marginTop: 16.5,
+    marginLeft: 56,
     justifyContent: 'center',
   },
 });

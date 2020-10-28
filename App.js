@@ -1,10 +1,19 @@
 import React from 'react';
+import { createAppContainer } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+
+import CustomDrawer from './components/Drawer';
+
 import Home from './pages/home/Home'
 
-export default function App(){
+const Routes = createAppContainer(
+  createDrawerNavigator({
+    Home,
+    //logOut,
+  }, {
+    initialRoutName: 'Home',
+    contentComponent: CustomDrawer
+  })
+);
 
-  return(
-      <Home>
-      </Home>
-     )
-}
+export default Routes;
