@@ -36,8 +36,8 @@ const api_call = (endpoint) => {
 }
 
 export default function Home() {
-
     let nomeRede = `Casa Fiesta`;
+    let cnpjMatriz = `4686827000151`; // TEMPORÁRIO ATÉ TERMOS AUTENTICAÇÃO
     const [ valoresPerdas, setValoresPerdas ] = React.useState('');
     const [ valoresTrocas, setValoresTrocas ] = React.useState('');
 
@@ -79,8 +79,6 @@ export default function Home() {
         })
 
         setValoresPerdas(perdas);
-        console.log(result);
-        console.log(valoresPerdas);
       }, (error) => {
         var errorMsg = 'Erro ao buscar os Valores para a tabela';
         alert(errorMsg);
@@ -99,33 +97,56 @@ export default function Home() {
         },
         devolucao: {
           boleto: 0
-        }
+        },
+        total: 0
       }
 
-      api_call(`cardtrocas/tfcard/`).then((data) => {
+      api_call(`cardtrocas/tfcard/?cnpjmatriz=${cnpjMatriz}`).then((data) => {
         let result = data[0].results;
-
         result.forEach((value) => {
           if(value.id === 1) {
             trocas.ultimos7dias = value.valortrocas;
-            // 7 dias
           }
 
           if(value.id === 2) {
             trocas.ultimos35dias = value.valortrocas;
-            // 35 Dias
           };
+        })
+        
+        api_call(`cardtrocas/grafico12m/?cnpjmatriz=${cnpjMatriz}`).then((data) => {
+          let result = data[0].results;
+          result.forEach((value) => {
+            console.log(value);
+            if(value.desctrocaformapagto === 'Bonificacao') {
+              trocas.lixoIndenizado.bonificacao = value.total;
+            };
+
+            if(value.desctrocaformapagto === 'Deposito') {
+              trocas.lixoIndenizado.deposito = value.total;
+            };
+
+            if(value.desctrocaformapagto === 'Boleto') {
+              trocas.devolucao.boleto = value.total;
+            }
+          })
+          total = trocas.lixoIndenizado.bonificacao + trocas.lixoIndenizado.deposito + trocas.devolucao.boleto;
+        }, (error) => {
+          var errorMsg = 'Erro ao buscar os Valores para a tabela';
+          alert(errorMsg);
+          console.log(`${errorMsg} -> `, error);
+          setValoresTrocas('');
         })
 
         setValoresTrocas(trocas);
         console.log(result);
-        console.log(valoresTrocas);
       }, (error) => {
         var errorMsg = 'Erro ao buscar os Valores para a tabela';
         alert(errorMsg);
         console.log(`${errorMsg} -> `, error);
         setValoresTrocas('');
       })
+      
+      setValoresTrocas(trocas);
     }
 
     return(

@@ -291,7 +291,7 @@ export default function Trocas(props) {
               </View>
     
               <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
-                <Totaltrocas/>
+                <Totaltrocas string={'Hello World'} valoresTrocas={valoresTrocas}/>
               </View>
     
     </View>
