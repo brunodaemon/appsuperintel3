@@ -9,7 +9,6 @@ import Home from './pages/home/Home'
 const Routes = createAppContainer(
   createDrawerNavigator({
     Home,
-    //logOut,
   }, {
     initialRoutName: 'Home',
     contentComponent: CustomDrawer
