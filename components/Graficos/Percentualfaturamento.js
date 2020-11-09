@@ -4,7 +4,14 @@ import { View } from 'react-native'
  
 class Percentualfaturamento extends React.PureComponent {
     render() {
-        const data = [5200, 5090, 5100, 5300, 5200, 5400, 5450,]
+        let valoresFaturamentoGrafico = this.props.valoresFaturamentoGrafico;
+        let data = []
+
+        if(valoresFaturamentoGrafico && valoresFaturamentoGrafico.length > 0) {
+            valoresFaturamentoGrafico.forEach((valor) => {
+                data.push(parseFloat(valor.faturamento));
+            })
+        }
  
         const contentInset = { top: 8, bottom:8 }
  

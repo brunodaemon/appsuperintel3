@@ -15,7 +15,6 @@ import { AppLoading } from 'expo';
 
 export default function Navbar(props){
 
-  console.log(props);
   let nomeRede = props.nomeRede ? props.nomeRede : ' ';
 
     let [fontsLoaded] = useFonts({

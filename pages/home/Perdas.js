@@ -100,8 +100,6 @@ const styles = StyleSheet.create({
 export default function Perdas(props) {
 
     let valoresPerdas = props.valoresPerdas || {
-      compras: 0,
-      vendas: 0,
       ultimos7dias: 0,
       ultimos35dias: 0
     }
@@ -172,7 +170,7 @@ export default function Perdas(props) {
                 <Participacaoperdas/>
               </View>
               <View style={styles.tabela}>
-                 <Listalojas/> 
+                <Listalojas/> 
               </View>
             </View>
 

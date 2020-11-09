@@ -127,12 +127,24 @@ const styles = StyleSheet.create({
 
 export default function Faturamento(props) {
   
-  let valoresPerdas = props.valoresPerdas || {
-    compras: 0,
-    vendas: 0,
-    ultimos7dias: 0,
-    ultimos35dias: 0
+  let valoresFaturamentoTotal = props.valoresFaturamentoTotal || {
+    seteDias: 0,
+    trinaCincoDias: 0,
   }
+
+  let valoresFaturamentoVariacao = props.valoresFaturamentoVariacao || {            
+    id: 1,
+    fatperc2: 0
+  };
+
+  let valoresFaturamentoLojasSemanal = props.valoresFaturamentoLojasSemanal || [];
+  let valoresFaturamentoGrafico = props.valoresFaturamentoGrafico || [];
+
+  let valoresFaturamentoComprasVendas = props.valoresFaturamentoComprasVendas || {
+    compras: 0,
+    vendas: 0
+  }
+
 
   let [fontsLoaded] = useFonts({
     'TitilliumWeb': require('../../assets/fonts/TitilliumWeb-Regular.ttf'),
@@ -157,33 +169,32 @@ export default function Faturamento(props) {
                 Total Rede
               </Text>
               <View style={{flex: 1, flexDirection: 'row'}}>
+                <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
+                  <Text style={styles.subtitulo}>
+                    últimos 7 dias
+                  </Text>
+                  <View style={{flexDirection: 'row'}}>
+                  <Text style={styles.R$}>
+                    R$
+                  </Text>
+                  <Text style={styles.valor}>
+                    <NumberFormat value={ valoresFaturamentoTotal.seteDias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
+                  </Text>
+                </View>
+              </View>
     
               <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
-              <Text style={styles.subtitulo}>
-                últimos 7 dias
-              </Text>
-              <View style={{flexDirection: 'row'}}>
-              <Text style={styles.R$}>
-                R$
-              </Text>
-              <Text style={styles.valor}>
-                340.256,25
-              </Text>
-              </View>
-              </View>
-    
-              <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
-              <Text style={styles.subtitulo}>
-                últimos 35 dias
-              </Text>
-              <View style={{flexDirection: 'row'}}>
-              <Text style={styles.R$}>
-                R$
-              </Text>
-              <Text style={styles.valor}>
-                1.245.369,01
-              </Text>
-              </View>
+                <Text style={styles.subtitulo}>
+                  últimos 35 dias
+                </Text>
+                <View style={{flexDirection: 'row'}}>
+                  <Text style={styles.R$}>
+                    R$
+                  </Text>
+                  <Text style={styles.valor}>
+                    <NumberFormat value={ valoresFaturamentoTotal.trinaCincoDias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
+                  </Text>
+                </View>
               </View>
     
               </View>
@@ -196,11 +207,11 @@ export default function Faturamento(props) {
               <View style={{flex: 1, flexDirection: 'row'}}>
               <Card size={60} icon="chevron-up" />
               <Text style={styles.variacao}>
-                1,18%
+                <NumberFormat value={ valoresFaturamentoVariacao.fatperc2 } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> %
               </Text>
               </View>
               <View style={styles.grafico2}>
-                <Percentualfaturamento/>
+                <Percentualfaturamento valoresFaturamentoGrafico={valoresFaturamentoGrafico}/>
               </View>
               
             </View>
@@ -213,10 +224,10 @@ export default function Faturamento(props) {
                 no faturamento total semanal
               </Text>
               <View style={styles.grafico}>
-                <Participacaofaturamento/>
+                <Participacaofaturamento valoresFaturamentoLojasSemanal={valoresFaturamentoLojasSemanal}/>
               </View>
               <View style={styles.tabela}>
-                 <Listalojas/> 
+                <Listalojas valoresFaturamentoLojasSemanal={valoresFaturamentoLojasSemanal}/> 
               </View>
             </View>
     
@@ -234,7 +245,7 @@ export default function Faturamento(props) {
                 R$
               </Text>
               <Text style={styles.valor}>
-                <NumberFormat value={ valoresPerdas.compras } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
+                <NumberFormat value={ valoresFaturamentoComprasVendas.compras } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
               </Text>
               </View>
               </View>
@@ -252,7 +263,7 @@ export default function Faturamento(props) {
                 R$
               </Text>
               <Text style={styles.valor}>
-                <NumberFormat value={ valoresPerdas.vendas } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
+                <NumberFormat value={ valoresFaturamentoComprasVendas.vendas } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
               </Text>
               </View>
               </View>

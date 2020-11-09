@@ -38,53 +38,143 @@ const api_call = (endpoint) => {
 export default function Home() {
     let nomeRede = `Casa Fiesta`;
     let cnpjMatriz = `4686827000151`; // TEMPORÁRIO ATÉ TERMOS AUTENTICAÇÃO
+    const [ valoresFaturamentoTotal, setValoresFaturamentoTotal ] = React.useState('');
+    const [ valoresFaturamentoVariacao, setValoresFaturamentoVariacao ] = React.useState('');
+    const [ valoresFaturamentoLojasSemanal, setValoresFaturamentoLojasSemanal ] = React.useState('');
+    const [ valoresFaturamentoGrafico, setValoresFaturamentoGrafico ] = React.useState('');
+    const [ valoresFaturamentoComprasVendas, setValoresFaturamentoComprasVendas ] = React.useState('');
     const [ valoresPerdas, setValoresPerdas ] = React.useState('');
     const [ valoresTrocas, setValoresTrocas ] = React.useState('');
 
-    if(valoresPerdas === '') {
-      api_call(`cardperdas/calendario-perdas-semanais-valores-consolidados/`).then((data) => {
+    if(valoresFaturamentoTotal === '') {
+      api_call(`app001/app001-faturamento-rede-7dd-35dd/?cnpjmatriz=${cnpjMatriz}`).then((data) => {
         let result = data[0].results;
-        
-        var perdas = {
-          compras: 0,
-          vendas: 0,
-          ultimos7dias: 0,
-          ultimos35dias: 0
+        var totaisFaturamento = {
+          seteDias: 0,
+          trinaCincoDias: 0,
         }
 
         result.forEach((value) => {
+          if(value.id === 7) {
+            totaisFaturamento.seteDias = value.faturamento
+          }
+          
+          if(value.id === 35) {
+            totaisFaturamento.trinaCincoDias = value.faturamento
+          }
+        })
 
+        setValoresFaturamentoTotal(totaisFaturamento);
+      }, (error) => {
+        var errorMsg = 'Erro ao buscar os Valores para a tabela';
+        alert(errorMsg);
+        console.error(`${errorMsg} -> `, error);
+        setValoresPerdas('');
+      })
+    }
+
+    if(valoresFaturamentoVariacao === '') {
+      api_call(`app001/app001-faturamento-variacao-percentual/`).then((data) => {
+        let result = data[0].results;
+        setValoresFaturamentoVariacao(result[0]);
+      }, (error) => {
+        var errorMsg = 'Erro ao buscar os Valores para a tabela';
+        alert(errorMsg);
+        console.error(`${errorMsg} -> `, error);
+        setValoresPerdas('');
+      })
+    }
+
+    if(valoresFaturamentoLojasSemanal === '') {
+      api_call(`app001/app001-faturamento-semanal-lojas/?id=7`).then((data) => {
+        let result = data[0].results;
+        let rows = [];
+        let total = 0;
+        if(result) {
+          result.forEach((valor) => {
+            total += parseFloat(valor.faturamento7dd);
+          });
+
+          result.forEach((valor) => {
+            rows.push({loja: valor.apelidoloja, cnpj: valor.cnpjloja, faturamento: parseFloat(valor.faturamento7dd), porcentagem: (parseFloat(valor.faturamento7dd) / total)});
+          })
+        }
+        rows.sort((a, b) => {return b.faturamento - a.faturamento});
+        let id = 1;
+        rows.forEach((row) => {
+          row.id = id
+          id += 1;
+        })
+        setValoresFaturamentoLojasSemanal(rows);
+      }, (error) => {
+        var errorMsg = 'Erro ao buscar os Valores para a tabela';
+        alert(errorMsg);
+        console.error(`${errorMsg} -> `, error);
+        setValoresPerdas('');
+      })
+    }
+
+    if(valoresFaturamentoGrafico === '') {
+      api_call(`app001/app001-faturamento-semanal-rede-grafico-linha/`).then((data) => {
+        let result = data[0].results;
+        setValoresFaturamentoGrafico(result);
+      }, (error) => {
+        var errorMsg = 'Erro ao buscar os Valores para a tabela';
+        alert(errorMsg);
+        console.error(`${errorMsg} -> `, error);
+        setValoresPerdas('');
+      })
+    }
+
+    if(valoresFaturamentoComprasVendas === '') {
+      api_call(`app001/app001-compras-vendas-trocas-perdas-ultimos7dd/`).then((data) => {
+        let result = data[0].results;
+        
+        var valores = {
+          compras: 0,
+          vendas: 0
+        }
+
+        result.forEach((value) => {
+          if(value.operacao === 'COMPRAS') valores.compras = parseFloat(value.valor)
+          if(value.operacao === 'VENDAS') valores.vendas = parseFloat(value.valor)
+        })
+
+        setValoresFaturamentoComprasVendas(valores);
+      }, (error) => {
+        var errorMsg = 'Erro ao buscar os Valores para a tabela';
+        alert(errorMsg);
+        console.error(`${errorMsg} -> `, error);
+        setValoresFaturamentoComprasVendas('');
+      })
+    }
+
+    if(valoresPerdas === '') {
+      let perdas = {
+        ultimos7dias: 0,
+        ultimos35dias: 0
+      }
+
+      api_call(`cardperdas/pfcard/?cnpjmatriz=${cnpjMatriz}`).then((data) => {
+        let result = data[0].results;
+        result.forEach((value) => {
           if(value.id === 1) {
-            if(value.operacao === 'PERDAS') perdas.ultimos35dias += parseFloat(value.valor)
+            perdas.ultimos7dias = value.valorperdas;
           }
 
           if(value.id === 2) {
-            if(value.operacao === 'PERDAS') perdas.ultimos35dias += parseFloat(value.valor)
-          }
-
-          if(value.id === 3) {
-            if(value.operacao === 'PERDAS') perdas.ultimos35dias += parseFloat(value.valor)
-          }
-
-          if(value.id === 4) {
-            if(value.operacao === 'PERDAS') perdas.ultimos35dias += parseFloat(value.valor)
-          }
-
-          if(value.id === 5) {
-            if(value.operacao === 'COMPRAS') perdas.compras = parseFloat(value.valor)
-            if(value.operacao === 'VENDAS') perdas.vendas = parseFloat(value.valor)
-            if(value.operacao === 'PERDAS') perdas.ultimos7dias = parseFloat(value.valor)
-            if(value.operacao === 'PERDAS') perdas.ultimos35dias += parseFloat(value.valor)
-          }
-        })
+            perdas.ultimos35dias = value.valorperdas;
+          };
+        });
 
         setValoresPerdas(perdas);
       }, (error) => {
         var errorMsg = 'Erro ao buscar os Valores para a tabela';
         alert(errorMsg);
-        console.log(`${errorMsg} -> `, error);
+        console.error(`${errorMsg} -> `, error);
         setValoresPerdas('');
       })
+      
     }
 
     if(valoresTrocas === '') {     
@@ -116,7 +206,6 @@ export default function Home() {
         api_call(`cardtrocas/grafico12m/?cnpjmatriz=${cnpjMatriz}`).then((data) => {
           let result = data[0].results;
           result.forEach((value) => {
-            console.log(value);
             if(value.desctrocaformapagto === 'Bonificacao') {
               trocas.lixoIndenizado.bonificacao = value.total;
             };
@@ -129,20 +218,18 @@ export default function Home() {
               trocas.devolucao.boleto = value.total;
             }
           })
-          total = trocas.lixoIndenizado.bonificacao + trocas.lixoIndenizado.deposito + trocas.devolucao.boleto;
         }, (error) => {
           var errorMsg = 'Erro ao buscar os Valores para a tabela';
           alert(errorMsg);
-          console.log(`${errorMsg} -> `, error);
+          console.error(`${errorMsg} -> `, error);
           setValoresTrocas('');
         })
 
         setValoresTrocas(trocas);
-        console.log(result);
       }, (error) => {
         var errorMsg = 'Erro ao buscar os Valores para a tabela';
         alert(errorMsg);
-        console.log(`${errorMsg} -> `, error);
+        console.error(`${errorMsg} -> `, error);
         setValoresTrocas('');
       })
       
@@ -153,7 +240,11 @@ export default function Home() {
         <SafeAreaView style={styles.container}>
           <Navbar nomeRede={nomeRede} style={styles.Navbar}/>
           <ScrollView style={styles.containerscroll}>
-            <Faturamento valoresPerdas={valoresPerdas}/>
+            <Faturamento valoresFaturamentoTotal={valoresFaturamentoTotal} 
+              valoresFaturamentoVariacao={valoresFaturamentoVariacao} 
+              valoresFaturamentoLojasSemanal={valoresFaturamentoLojasSemanal}
+              valoresFaturamentoGrafico={valoresFaturamentoGrafico}
+              valoresFaturamentoComprasVendas={valoresFaturamentoComprasVendas}/>
             <Perdas valoresPerdas={valoresPerdas}/>
             <Trocas valoresTrocas={valoresTrocas}/>
           </ScrollView>
