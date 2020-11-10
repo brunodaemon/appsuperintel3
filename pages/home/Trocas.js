@@ -164,7 +164,10 @@ export default function Trocas(props) {
 
     let valoresTrocas = props.valoresTrocas || {
       ultimos7dias: 0,
-      ultimos35dias: 0,
+      ultimos35dias: 0
+    };
+
+    let valoresTrocasGrafico = props.valoresTrocasGrafico || {
       lixoIndenizado: {
         bonificacao: 0,
         deposito: 0
@@ -172,7 +175,7 @@ export default function Trocas(props) {
       devolucao: {
         boleto: 0
       }
-    }
+    };
 
     let [fontsLoaded] = useFonts({
       'TitilliumWeb': require('../../assets/fonts/TitilliumWeb-Regular.ttf'),
@@ -189,10 +192,10 @@ export default function Trocas(props) {
     
     
     <View style={styles.Sessao}>
-              <Text style={styles.nomesessao}>
-                Trocas
-              </Text>
-            </View>
+      <Text style={styles.nomesessao}>
+        Trocas
+      </Text>
+    </View>
             <View style={styles.card1}>
               <Text style={styles.titulocard}>
                 Total Rede
@@ -254,7 +257,7 @@ export default function Trocas(props) {
                 R$
               </Text>
               <Text style={styles.valortroca}>
-                <NumberFormat value={ valoresTrocas.lixoIndenizado.bonificacao } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
+                <NumberFormat value={ valoresTrocasGrafico.lixoIndenizado.bonificacao } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
               </Text>
               </View>
               <View style={{flexDirection: 'row'}}>
@@ -268,33 +271,32 @@ export default function Trocas(props) {
                 R$
               </Text>
               <Text style={styles.valortroca}>
-                <NumberFormat value={ valoresTrocas.lixoIndenizado.deposito } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
+                <NumberFormat value={ valoresTrocasGrafico.lixoIndenizado.deposito } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
               </Text>
               </View>
               <Text style={styles.titulomotivo}>
                 Devolução
               </Text>
               <View style={{flexDirection: 'row'}}>
-              <View style={styles.circulo3}/>
-              <Text style={styles.subtitulo}>
-                Boleto
-              </Text>
-              </View>
-              <View style={{flexDirection: 'row'}}>
-              <Text style={styles.R$troca}>
-                R$
-              </Text>
-              <Text style={styles.valortroca}>
-                <NumberFormat value={ valoresTrocas.devolucao.boleto } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
-              </Text>
-              </View>
+                <View style={styles.circulo3}/>
+                  <Text style={styles.subtitulo}>
+                    Boleto
+                  </Text>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  <Text style={styles.R$troca}>
+                    R$
+                  </Text>
+                  <Text style={styles.valortroca}>
+                    <NumberFormat value={ valoresTrocasGrafico.devolucao.boleto } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
+                  </Text>
+                </View>
               </View>
     
               <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
-                <Totaltrocas string={'Hello World'} valoresTrocas={valoresTrocas}/>
+                <Totaltrocas valoresTrocasGrafico={valoresTrocasGrafico}/>
               </View>
-    
-    </View>
+            </View>
             </View>
     
             <View style={styles.card7}>

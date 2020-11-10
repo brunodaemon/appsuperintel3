@@ -45,6 +45,7 @@ export default function Home() {
     const [ valoresFaturamentoComprasVendas, setValoresFaturamentoComprasVendas ] = React.useState('');
     const [ valoresPerdas, setValoresPerdas ] = React.useState('');
     const [ valoresTrocas, setValoresTrocas ] = React.useState('');
+    const [ valoresTrocasGrafico, setValoresTrocasGrafico ] = React.useState('');
 
     if(valoresFaturamentoTotal === '') {
       api_call(`app001/app001-faturamento-rede-7dd-35dd/?cnpjmatriz=${cnpjMatriz}`).then((data) => {
@@ -174,21 +175,12 @@ export default function Home() {
         console.error(`${errorMsg} -> `, error);
         setValoresPerdas('');
       })
-      
     }
 
-    if(valoresTrocas === '') {     
+    if(valoresTrocas === '') {
       var trocas = {
         ultimos7dias: 0,
-        ultimos35dias: 0,
-        lixoIndenizado: {
-          bonificacao: 0,
-          deposito: 0
-        },
-        devolucao: {
-          boleto: 0
-        },
-        total: 0
+        ultimos35dias: 0
       }
 
       api_call(`cardtrocas/tfcard/?cnpjmatriz=${cnpjMatriz}`).then((data) => {
@@ -201,30 +193,7 @@ export default function Home() {
           if(value.id === 2) {
             trocas.ultimos35dias = value.valortrocas;
           };
-        })
-        
-        api_call(`cardtrocas/grafico12m/?cnpjmatriz=${cnpjMatriz}`).then((data) => {
-          let result = data[0].results;
-          result.forEach((value) => {
-            if(value.desctrocaformapagto === 'Bonificacao') {
-              trocas.lixoIndenizado.bonificacao = value.total;
-            };
-
-            if(value.desctrocaformapagto === 'Deposito') {
-              trocas.lixoIndenizado.deposito = value.total;
-            };
-
-            if(value.desctrocaformapagto === 'Boleto') {
-              trocas.devolucao.boleto = value.total;
-            }
-          })
-        }, (error) => {
-          var errorMsg = 'Erro ao buscar os Valores para a tabela';
-          alert(errorMsg);
-          console.error(`${errorMsg} -> `, error);
-          setValoresTrocas('');
-        })
-
+        });
         setValoresTrocas(trocas);
       }, (error) => {
         var errorMsg = 'Erro ao buscar os Valores para a tabela';
@@ -232,8 +201,42 @@ export default function Home() {
         console.error(`${errorMsg} -> `, error);
         setValoresTrocas('');
       })
-      
-      setValoresTrocas(trocas);
+    }
+
+    if(valoresTrocasGrafico === '') {
+      var trocasGraficos = {
+        lixoIndenizado: {
+          bonificacao: 0,
+          deposito: 0
+        },
+        devolucao: {
+          boleto: 0
+        }
+      }
+        
+      api_call(`cardtrocas/grafico12m/?cnpjmatriz=${cnpjMatriz}`).then((data) => {
+        let result = data[0].results;
+        result.forEach((value) => {
+          if(value.desctrocaformapagto === 'Bonificacao') {
+            trocasGraficos.lixoIndenizado.bonificacao = value.total;
+          };
+
+          if(value.desctrocaformapagto === 'Deposito') {
+            trocasGraficos.lixoIndenizado.deposito = value.total;
+          };
+
+          if(value.desctrocaformapagto === 'Boleto') {
+            trocasGraficos.devolucao.boleto = value.total;
+          }
+        })
+
+        setValoresTrocasGrafico(trocasGraficos);
+      }, (error) => {
+        var errorMsg = 'Erro ao buscar os Valores para a tabela';
+        alert(errorMsg);
+        console.error(`${errorMsg} -> `, error);
+        setValoresTrocas('');
+      })        
     }
 
     return(
@@ -246,7 +249,7 @@ export default function Home() {
               valoresFaturamentoGrafico={valoresFaturamentoGrafico}
               valoresFaturamentoComprasVendas={valoresFaturamentoComprasVendas}/>
             <Perdas valoresPerdas={valoresPerdas}/>
-            <Trocas valoresTrocas={valoresTrocas}/>
+            <Trocas valoresTrocas={valoresTrocas} valoresTrocasGrafico={valoresTrocasGrafico}/>
           </ScrollView>
         </SafeAreaView>
       )

@@ -5,32 +5,23 @@ class PieChartWithDifferentArcs extends React.PureComponent {
 
     render() {
         let props = this.props;
-        let valoresTrocas = props.valoresTrocas || {
-            ultimos7dias: 0,
-            ultimos35dias: 0,
-            lixoIndenizado: {
-                bonificacao: 0,
-                deposito: 0
-            },
-            devolucao: {
-                boleto: 0
-            }
-        }
+        console.log('pie! ->', JSON.stringify(props));
+        let valoresTrocasGrafico = props.valoresTrocasGrafico;
 
         const data = [
             {
                 key: 1,
-                value: valoresTrocas.lixoIndenizado.bonificacao.toString(),
+                value: valoresTrocasGrafico.lixoIndenizado.bonificacao.toString(),
                 svg: { fill: '#1A4069' }
             },
             {
                 key: 2,
-                value: valoresTrocas.lixoIndenizado.deposito.toString(),
+                value: valoresTrocasGrafico.lixoIndenizado.deposito.toString(),
                 svg: { fill: '#00E152' }
             },
             {
                 key: 3,
-                value: valoresTrocas.devolucao.boleto.toString(),
+                value: valoresTrocasGrafico.devolucao.boleto.toString(),
                 svg: { fill: '#3883C9' }
             },
         ]
