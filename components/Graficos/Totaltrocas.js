@@ -5,7 +5,6 @@ class PieChartWithDifferentArcs extends React.PureComponent {
 
     render() {
         let props = this.props;
-        console.log('pie! ->', JSON.stringify(props));
         let valoresTrocasGrafico = props.valoresTrocasGrafico;
 
         const data = [
