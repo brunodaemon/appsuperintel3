@@ -3,15 +3,40 @@ import { StackedBarChart } from 'react-native-svg-charts'
  
 class Participacaotrocas extends React.PureComponent {
     render() {
-        const data = [
-            {
-                lojaum: 3840,
-                lojadois: 1920,
-                lojatres: 960,
-                lojaquatro: 400,
-                outros: 400,
-            },
 
+        let valoresTrocasLojasSemanal = this.props.valoresTrocasLojasSemanal || [];
+        let valoresLojas = {
+            lojaum: 0,
+            lojadois: 0,
+            lojatres: 0,
+            lojaquatro: 0,
+            outros: 0,
+        }
+
+        if(valoresTrocasLojasSemanal && valoresTrocasLojasSemanal.length > 0) {
+            if(valoresTrocasLojasSemanal[0]) {
+                valoresLojas.lojaum = parseFloat(valoresTrocasLojasSemanal[0].vlrtrocas);
+            }
+                        
+            if(valoresTrocasLojasSemanal[1]) {
+                valoresLojas.lojadois = parseFloat(valoresTrocasLojasSemanal[1].vlrtrocas);
+            }
+
+            if(valoresTrocasLojasSemanal[2]) {
+                valoresLojas.lojatres = parseFloat(valoresTrocasLojasSemanal[2].vlrtrocas);
+            }
+
+            if(valoresTrocasLojasSemanal[3]) {
+                valoresLojas.lojaquatro = parseFloat(valoresTrocasLojasSemanal[3].vlrtrocas);
+            }
+            
+            for (let index = 4; index < valoresTrocasLojasSemanal.length; index++) {
+                valoresLojas.outros += parseFloat(valoresTrocasLojasSemanal[index].vlrtrocas);
+            }
+        }
+
+        const data = [
+            valoresLojas
         ]
  
         const colors = ['#021017', '#153354', '#175A9C', '#3883C9',  '#C5C5C5']

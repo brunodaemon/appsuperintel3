@@ -200,24 +200,24 @@ export default function Faturamento(props) {
             </View>
 
             <View style={{flex: 1, flexDirection: 'row'}}>
-            <View style={styles.card4}>
-              <Text style={styles.titulocard}>
-                Compras Rede
-              </Text>
-              <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
-              <Text style={styles.subtitulo}>
-                valor semanal
-              </Text>
-              <View style={{flexDirection: 'row'}}>
-              <Text style={styles.R$}>
-                R$
-              </Text>
-              <Text style={styles.valor}>
-                <NumberFormat value={ valoresFaturamentoComprasVendas.compras } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
-              </Text>
+              <View style={styles.card4}>
+                <Text style={styles.titulocard}>
+                  Compras Rede
+                </Text>
+                <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
+                <Text style={styles.subtitulo}>
+                  valor semanal
+                </Text>
+                <View style={{flexDirection: 'row'}}>
+                <Text style={styles.R$}>
+                  R$
+                </Text>
+                <Text style={styles.valor}>
+                  <NumberFormat value={ valoresFaturamentoComprasVendas.compras } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
+                </Text>
+                </View>
+                </View>
               </View>
-              </View>
-            </View>
             <View style={styles.card5}>
             <Text style={styles.titulocard}>
                 Vendas Rede

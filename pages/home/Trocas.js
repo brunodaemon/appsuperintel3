@@ -167,7 +167,7 @@ export default function Trocas(props) {
       ultimos35dias: 0
     };
 
-    let valoresTrocasGrafico = props.valoresTrocasGrafico || {
+    /* let valoresTrocasGrafico = props.valoresTrocasGrafico || {
       lixoIndenizado: {
         bonificacao: 0,
         deposito: 0
@@ -175,7 +175,9 @@ export default function Trocas(props) {
       devolucao: {
         boleto: 0
       }
-    };
+    }; */
+
+    let valoresTrocasLojasSemanal = props.valoresTrocasLojasSemanal || [];
 
     let [fontsLoaded] = useFonts({
       'TitilliumWeb': require('../../assets/fonts/TitilliumWeb-Regular.ttf'),
@@ -310,10 +312,10 @@ export default function Trocas(props) {
                 nas trocas totais semanais
               </Text>
               <View style={styles.grafico}>
-                <Participacaotrocas/>
+                <Participacaotrocas valoresTrocasLojasSemanal={valoresTrocasLojasSemanal}/>
               </View>
               <View style={styles.tabela}>
-                 <Listalojas/> 
+                 <Listalojas valoresTrocasLojasSemanal={valoresTrocasLojasSemanal}/> 
               </View>
             </View>
  

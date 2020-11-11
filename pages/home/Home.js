@@ -44,8 +44,9 @@ export default function Home() {
     const [ valoresFaturamentoGrafico, setValoresFaturamentoGrafico ] = React.useState('');
     const [ valoresFaturamentoComprasVendas, setValoresFaturamentoComprasVendas ] = React.useState('');
     const [ valoresPerdas, setValoresPerdas ] = React.useState('');
+    const [ valoresPerdasLojasSemanal, setValoresPerdasLojasSemanal ] = React.useState('');
     const [ valoresTrocas, setValoresTrocas ] = React.useState('');
-    const [ valoresTrocasGrafico, setValoresTrocasGrafico ] = React.useState('');
+    const [ valoresTrocasLojasSemanal, setValoresTrocasLojasSemanal ] = React.useState('');
 
     if(valoresFaturamentoTotal === '') {
       api_call(`app001/app001-faturamento-rede-7dd-35dd/?cnpjmatriz=${cnpjMatriz}`).then((data) => {
@@ -177,6 +178,25 @@ export default function Home() {
       })
     }
 
+        
+    if(valoresPerdasLojasSemanal === '') {
+      api_call(`app001/app001-tabela-perdas-por-loja-com-percentuais/`).then((data) => {
+        let result = data[0].results;
+        result.sort((a, b) => {return parseFloat(b.vlrperdas) - parseFloat(a.vlrperdas)});
+        let id = 1;
+        result.forEach((row) => {
+          row.id = id
+          id += 1;
+        })
+        setValoresPerdasLojasSemanal(result);
+      }, (error) => {
+        var errorMsg = 'Erro ao buscar os Valores para a tabela';
+        alert(errorMsg);
+        console.error(`${errorMsg} -> `, error);
+        setValoresPerdas('');
+      })
+    }
+
     if(valoresTrocas === '') {
       var trocas = {
         ultimos7dias: 0,
@@ -202,41 +222,23 @@ export default function Home() {
         setValoresTrocas('');
       })
     }
-
-    if(valoresTrocasGrafico === '') {
-      var trocasGraficos = {
-        lixoIndenizado: {
-          bonificacao: 0,
-          deposito: 0
-        },
-        devolucao: {
-          boleto: 0
-        }
-      }
-        
-      api_call(`cardtrocas/grafico12m/?cnpjmatriz=${cnpjMatriz}`).then((data) => {
+    
+    if(valoresTrocasLojasSemanal === '') {
+      api_call(`app001/app001-tabela-trocas-por-loja-com-percentuais/`).then((data) => {
         let result = data[0].results;
-        result.forEach((value) => {
-          if(value.desctrocaformapagto === 'Bonificacao') {
-            trocasGraficos.lixoIndenizado.bonificacao = value.total;
-          };
-
-          if(value.desctrocaformapagto === 'Deposito') {
-            trocasGraficos.lixoIndenizado.deposito = value.total;
-          };
-
-          if(value.desctrocaformapagto === 'Boleto') {
-            trocasGraficos.devolucao.boleto = value.total;
-          }
+        result.sort((a, b) => {return parseFloat(b.vlrtrocas) - parseFloat(a.vlrtrocas)});
+        let id = 1;
+        result.forEach((row) => {
+          row.id = id
+          id += 1;
         })
-
-        setValoresTrocasGrafico(trocasGraficos);
+        setValoresTrocasLojasSemanal(result);
       }, (error) => {
         var errorMsg = 'Erro ao buscar os Valores para a tabela';
         alert(errorMsg);
         console.error(`${errorMsg} -> `, error);
-        setValoresTrocas('');
-      })        
+        setValoresPerdas('');
+      })
     }
 
     return(
@@ -247,9 +249,9 @@ export default function Home() {
               valoresFaturamentoVariacao={valoresFaturamentoVariacao} 
               valoresFaturamentoLojasSemanal={valoresFaturamentoLojasSemanal}
               valoresFaturamentoGrafico={valoresFaturamentoGrafico}
-              valoresFaturamentoComprasVendas={valoresFaturamentoComprasVendas}/>
-            <Perdas valoresPerdas={valoresPerdas}/>
-            <Trocas valoresTrocas={valoresTrocas} valoresTrocasGrafico={valoresTrocasGrafico}/>
+              valoresFaturamentoComprasVendas={valoresFaturamentoComprasVendas} />
+            <Perdas valoresPerdas={valoresPerdas} valoresPerdasLojasSemanal={valoresPerdasLojasSemanal} />
+            <Trocas valoresTrocas={valoresTrocas} valoresTrocasLojasSemanal={valoresTrocasLojasSemanal} />
           </ScrollView>
         </SafeAreaView>
       )

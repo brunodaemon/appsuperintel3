@@ -104,6 +104,8 @@ export default function Perdas(props) {
       ultimos35dias: 0
     }
 
+    let valoresPerdasLojasSemanal = props.valoresPerdasLojasSemanal || [];
+
     let [fontsLoaded] = useFonts({
       'TitilliumWeb': require('../../assets/fonts/TitilliumWeb-Regular.ttf'),
       'TitilliumWebBold': require('../../assets/fonts/TitilliumWeb-Bold.ttf'),
@@ -167,10 +169,10 @@ export default function Perdas(props) {
                 nas perdas totais semanais
               </Text>
               <View style={styles.grafico}>
-                <Participacaoperdas/>
+                <Participacaoperdas valoresPerdasLojasSemanal={valoresPerdasLojasSemanal}/>
               </View>
               <View style={styles.tabela}>
-                <Listalojas/> 
+                <Listalojas valoresPerdasLojasSemanal={valoresPerdasLojasSemanal}/>
               </View>
             </View>
 

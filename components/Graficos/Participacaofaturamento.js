@@ -11,7 +11,6 @@ class Participacaofaturamento extends React.PureComponent {
             lojaquatro: 0,
             outros: 0,
         }
-        console.log(valoresFaturamentoLojasSemanal);
 
         if(valoresFaturamentoLojasSemanal && valoresFaturamentoLojasSemanal.length > 0) {
             if(valoresFaturamentoLojasSemanal[0]) {
