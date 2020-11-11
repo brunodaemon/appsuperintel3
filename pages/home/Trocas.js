@@ -233,6 +233,7 @@ export default function Trocas(props) {
               </View>
             </View>
     
+           {/*
             <View style={styles.card9}>
               <Text style={styles.titulocard}>
                 Trocas Recebidas
@@ -292,12 +293,14 @@ export default function Trocas(props) {
                   </Text>
                 </View>
               </View>
+              
     
               <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
                 <Totaltrocas valoresTrocasGrafico={valoresTrocasGrafico}/>
               </View>
             </View>
             </View>
+            */}
     
             <View style={styles.card7}>
               <Text style={styles.titulocard}>

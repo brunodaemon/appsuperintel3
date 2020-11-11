@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       height: 350,
       marginTop: 15,
+      marginBottom: 15,
       padding: 20,
     },
     card4:{
@@ -103,7 +104,6 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       height: 100,
       marginTop: 15,
-      marginBottom:15,
       padding: 20,
       flex: 1,
     },
@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       height: 100,
       marginTop: 15,
-      marginBottom:15,
       marginLeft: 15,
       padding: 20,
       flex: 1,
@@ -199,38 +198,7 @@ export default function Faturamento(props) {
     
               </View>
             </View>
-    
-            <View style={styles.card2}>
-              <Text style={styles.titulocard}>
-                Variação Percentual Faturamento
-              </Text>
-              <View style={{flex: 1, flexDirection: 'row'}}>
-              <Card size={60} icon="chevron-up" />
-              <Text style={styles.variacao}>
-                <NumberFormat value={ valoresFaturamentoVariacao.fatperc2 } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> %
-              </Text>
-              </View>
-              <View style={styles.grafico2}>
-                <Percentualfaturamento valoresFaturamentoGrafico={valoresFaturamentoGrafico}/>
-              </View>
-              
-            </View>
-    
-            <View style={styles.card3}>
-              <Text style={styles.titulocard}>
-                Participação das Lojas
-              </Text>
-              <Text style={styles.subtitulo}>
-                no faturamento total semanal
-              </Text>
-              <View style={styles.grafico}>
-                <Participacaofaturamento valoresFaturamentoLojasSemanal={valoresFaturamentoLojasSemanal}/>
-              </View>
-              <View style={styles.tabela}>
-                <Listalojas valoresFaturamentoLojasSemanal={valoresFaturamentoLojasSemanal}/> 
-              </View>
-            </View>
-    
+
             <View style={{flex: 1, flexDirection: 'row'}}>
             <View style={styles.card4}>
               <Text style={styles.titulocard}>
@@ -268,6 +236,37 @@ export default function Faturamento(props) {
               </View>
               </View>
             </View>
+            </View>
+    
+            <View style={styles.card2}>
+              <Text style={styles.titulocard}>
+                Variação Percentual Faturamento
+              </Text>
+              <View style={{flex: 1, flexDirection: 'row'}}>
+              <Card size={60} icon="chevron-up" />
+              <Text style={styles.variacao}>
+                <NumberFormat value={ valoresFaturamentoVariacao.fatperc2 } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> %
+              </Text>
+              </View>
+              <View style={styles.grafico2}>
+                <Percentualfaturamento valoresFaturamentoGrafico={valoresFaturamentoGrafico}/>
+              </View>
+              
+            </View>
+    
+            <View style={styles.card3}>
+              <Text style={styles.titulocard}>
+                Participação das Lojas
+              </Text>
+              <Text style={styles.subtitulo}>
+                no faturamento total semanal
+              </Text>
+              <View style={styles.grafico}>
+                <Participacaofaturamento valoresFaturamentoLojasSemanal={valoresFaturamentoLojasSemanal}/>
+              </View>
+              <View style={styles.tabela}>
+                <Listalojas valoresFaturamentoLojasSemanal={valoresFaturamentoLojasSemanal}/> 
+              </View>
             </View>
             
         </SafeAreaView>

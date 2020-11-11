@@ -1,6 +1,9 @@
-import React from 'react'
-import { LineChart, YAxis, Grid } from 'react-native-svg-charts'
-import { View } from 'react-native'
+import React from 'react';
+import { LineChart, YAxis, Grid } from 'react-native-svg-charts';
+import { View } from 'react-native';
+import { useFonts } from 'expo-font';
+import { AppLoading } from 'expo';
+import { Card } from 'react-native-paper';
  
 class Percentualfaturamento extends React.PureComponent {
     render() {
@@ -13,7 +16,9 @@ class Percentualfaturamento extends React.PureComponent {
             })
         }
  
-        const contentInset = { top: 8, bottom:8 }
+        const contentInset = { top: 8, bottom:8, left: 8, right: 8, }
+
+        
  
         return (
             <View style={{ height: 150, flexDirection: 'row' }}>
@@ -26,6 +31,7 @@ class Percentualfaturamento extends React.PureComponent {
                     }}
                     numberOfTicks={4}
                     formatLabel={(value) => `${value}`}
+
                 />
                 <LineChart
                     style={{ flex: 1, marginLeft: 16 }}
