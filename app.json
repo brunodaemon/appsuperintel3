@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "APP Superintel",
+    "name": "Superintel",
     "slug": "app-superintel-react",
-    "version": "1.0.0",
+    "version": "0.1.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -18,7 +18,7 @@
     ],
     "ios": {
       "bundleIdentifier": "com.superintel.appsuperintel",
-      "buildNumber": "1.0.0",
+      "buildNumber": "0.1.1",
       "supportsTablet": true
     },
     "android": {
