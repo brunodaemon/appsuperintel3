@@ -28,7 +28,7 @@ class Percentualfaturamento extends React.PureComponent {
                         fontSize: 12
                     }}
                     numberOfTicks={4}
-                    formatLabel={(value) => `${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value)}`}/>
+                    formatLabel={(value) => `R$ ${value}`}/>
                 <View style={{ flex: 1, marginLeft: 10, }}>
                     <LineChart
                         style={{ flex: 1, marginLeft: 0 }}
