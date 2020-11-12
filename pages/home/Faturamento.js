@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     },
     tabela:{
         marginLeft: -20,
-        marginRight:-20,
+        marginRight: -20,
         height: 60,
     },
 

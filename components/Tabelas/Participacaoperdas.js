@@ -12,26 +12,27 @@ const styles = StyleSheet.create({
         flex:1,
         backgroundColor: '#FFF',
         marginTop: 5,
+        height: 'auto'
     },
     barra:{
         width: 50,
         height: 32,
         justifyContent: 'center',
     },
-    view:{
-        width: 160,
-        height: 32,
-        justifyContent: 'center',
+    view: {
+      width: 140,
+      height: 32,
+      justifyContent: 'center',
     },
-    view2:{
-        width: 120,
-        height: 32,
-        justifyContent: 'center',
+    view2: {
+      width: 140,
+      height: 32,
+      justifyContent: 'center',
     },
-    view3:{
-        width: 50,
-        height: 32,
-        justifyContent: 'center',
+    view3: {
+      width: 50,
+      height: 32,
+      justifyContent: 'center',
     },
     texto:{
         fontSize: 15,

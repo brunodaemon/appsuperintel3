@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFF',
-    marginTop: 5,
+    marginTop: 5
   },
   barra: {
     width: 50,
@@ -19,12 +19,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   view: {
-    width: 160,
+    width: 140,
     height: 32,
     justifyContent: 'center',
   },
   view2: {
-    width: 120,
+    width: 140,
     height: 32,
     justifyContent: 'center',
   },

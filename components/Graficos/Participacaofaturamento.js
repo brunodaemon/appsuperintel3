@@ -43,7 +43,7 @@ class Participacaofaturamento extends React.PureComponent {
  
         return (
             <StackedBarChart
-                style={{ height: 42, borderRadius: 10, marginTop: 0, }}
+                style={{ height: 42, borderRadius: 10, marginTop: 0 }}
                 keys={keys}
                 colors={colors}
                 data={data}
