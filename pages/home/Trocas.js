@@ -158,6 +158,11 @@ const styles = StyleSheet.create({
         marginRight:-20,
         height: 60,
     },
+    textoInformativoSemDados:{
+      fontSize: 21,
+      color: '#032639',
+      fontFamily: 'TitilliumWebBold',
+    }
   });
 
 export default function Trocas(props) {
@@ -166,16 +171,6 @@ export default function Trocas(props) {
       ultimos7dias: 0,
       ultimos35dias: 0
     };
-
-    /* let valoresTrocasGrafico = props.valoresTrocasGrafico || {
-      lixoIndenizado: {
-        bonificacao: 0,
-        deposito: 0
-      },
-      devolucao: {
-        boleto: 0
-      }
-    }; */
 
     let valoresTrocasLojasSemanal = props.valoresTrocasLojasSemanal || [];
 
@@ -202,107 +197,38 @@ export default function Trocas(props) {
               <Text style={styles.titulocard}>
                 Total Rede
               </Text>
+
               <View style={{flex: 1, flexDirection: 'row'}}>
-    
-              <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
-              <Text style={styles.subtitulo}>
-                últimos 7 dias
-              </Text>
-              <View style={{flexDirection: 'row'}}>
-              <Text style={styles.R$}>
-                R$
-              </Text>
-              <Text style={styles.valor}>
-                <NumberFormat value={ valoresTrocas.ultimos7dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
-              </Text>
-              </View>
-              </View>
-    
-              <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
-              <Text style={styles.subtitulo}>
-                últimos 35 dias
-              </Text>
-              <View style={{flexDirection: 'row'}}>
-              <Text style={styles.R$}>
-                R$
-              </Text>
-              <Text style={styles.valor}>
-                <NumberFormat value={ valoresTrocas.ultimos35dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
-              </Text>
-              </View>
-              </View>
-    
-              </View>
-            </View>
-    
-           {/*
-            <View style={styles.card9}>
-              <Text style={styles.titulocard}>
-                Trocas Recebidas
-              </Text>
-              <Text style={styles.subtitulo}>
-                últimos 12 meses
-              </Text>
-              <View style={{flex: 1, flexDirection: 'row'}}>
-    
-              <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
-              <Text style={styles.titulomotivo}>
-                Lixo Indenizado
-              </Text>
-              <View style={{flexDirection: 'row'}}>
-              <View style={styles.circulo1}/>
-              <Text style={styles.subtitulo}>
-                Bonificação
-              </Text>
-              </View>
-              <View style={{flexDirection: 'row'}}>
-              <Text style={styles.R$troca}>
-                R$
-              </Text>
-              <Text style={styles.valortroca}>
-                <NumberFormat value={ valoresTrocasGrafico.lixoIndenizado.bonificacao } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
-              </Text>
-              </View>
-              <View style={{flexDirection: 'row'}}>
-              <View style={styles.circulo2}/>
-              <Text style={styles.subtitulo3}>
-                Depósito
-              </Text>
-              </View>
-              <View style={{flexDirection: 'row'}}>
-              <Text style={styles.R$troca}>
-                R$
-              </Text>
-              <Text style={styles.valortroca}>
-                <NumberFormat value={ valoresTrocasGrafico.lixoIndenizado.deposito } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
-              </Text>
-              </View>
-              <Text style={styles.titulomotivo}>
-                Devolução
-              </Text>
-              <View style={{flexDirection: 'row'}}>
-                <View style={styles.circulo3}/>
+                <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
                   <Text style={styles.subtitulo}>
-                    Boleto
+                    últimos 7 dias
                   </Text>
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                  <Text style={styles.R$troca}>
+                  <View style={{flexDirection: 'row'}}>
+                  <Text style={styles.R$}>
                     R$
                   </Text>
-                  <Text style={styles.valortroca}>
-                    <NumberFormat value={ valoresTrocasGrafico.devolucao.boleto } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
+                  <Text style={styles.valor}>
+                    { valoresTrocas.ultimos7dias ? <NumberFormat value={ valoresTrocas.ultimos7dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>  : <Text> - </Text> }
                   </Text>
                 </View>
               </View>
-              
     
-              <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
-                <Totaltrocas valoresTrocasGrafico={valoresTrocasGrafico}/>
+                <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
+                  <Text style={styles.subtitulo}>
+                    últimos 35 dias
+                  </Text>
+                  <View style={{flexDirection: 'row'}}>
+                  <Text style={styles.R$}>
+                    R$
+                  </Text>
+                  <Text style={styles.valor}>
+                    { valoresTrocas.ultimos35dias ? <NumberFormat value={ valoresTrocas.ultimos35dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>  : <Text> - </Text> }
+                  </Text>
+                </View>
+              </View>
+    
               </View>
             </View>
-            </View>
-            */}
     
             <View style={styles.card7}>
               <Text style={styles.titulocard}>
@@ -311,12 +237,19 @@ export default function Trocas(props) {
               <Text style={styles.subtitulo}>
                 nas trocas totais semanais
               </Text>
-              <View style={styles.grafico}>
-                <Participacaotrocas valoresTrocasLojasSemanal={valoresTrocasLojasSemanal}/>
-              </View>
-              <View style={styles.tabela}>
-                 <Listalojas valoresTrocasLojasSemanal={valoresTrocasLojasSemanal}/> 
-              </View>
+              { valoresTrocasLojasSemanal.length > 1 ? 
+                <View>
+                  <View style={styles.grafico}>
+                    <Participacaotrocas valoresTrocasLojasSemanal={valoresTrocasLojasSemanal}/>
+                  </View>
+                  <View style={styles.tabela}>
+                    <Listalojas valoresTrocasLojasSemanal={valoresTrocasLojasSemanal}/> 
+                  </View>
+                </View> : 
+                <View style={{paddingVertical: 8}}>
+                  <Text style={styles.textoInformativoSemDados}>Não há dados para serem exibidos!</Text>
+                </View> }
+
             </View>
  
         </SafeAreaView>

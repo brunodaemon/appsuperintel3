@@ -14,7 +14,6 @@ class Percentualfaturamento extends React.PureComponent {
                 diaDaSemana.push(valor.diasem);
             })
         }
-        console.log(diaDaSemana);
  
         const contentInset = { top: 8, bottom:8, left: 8, right: 8, }
 
@@ -37,16 +36,18 @@ class Percentualfaturamento extends React.PureComponent {
                         contentInset={contentInset}>
                             <Grid />                                                  
                     </LineChart>
-                    <View>  
-                    <XAxis
-                        data={diaDaSemana}
-                        contentInset={contentInset}
-                        svg={{
-                            fill: '#707070',
-                            fontSize: 10,
-                        }}
-                        numberOfTicks={7}
-                        formatLabel={(value) => `${diaDaSemana[value]}`}/>
+                    <View>
+                        { diaDaSemana.length > 1 ?
+                                <XAxis
+                                data={diaDaSemana}
+                                contentInset={contentInset}
+                                svg={{
+                                    fill: '#707070',
+                                    fontSize: 10,
+                                }}
+                                numberOfTicks={7}
+                                formatLabel={(value) => `${diaDaSemana[value]}`}/> : <View />
+                        }  
                     </View>              
                 </View>              
             </View>

@@ -95,6 +95,11 @@ const styles = StyleSheet.create({
         marginRight:-20,
         height: 60,
     },
+    textoInformativoSemDados: {
+      fontSize: 21,
+      color: '#032639',
+      fontFamily: 'TitilliumWebBold',
+    }
   });
 
 export default function Perdas(props) {
@@ -139,7 +144,7 @@ export default function Perdas(props) {
                 R$
               </Text>
               <Text style={styles.valor}>
-                <NumberFormat value={ valoresPerdas.ultimos7dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
+                { valoresPerdas.ultimos7dias ? <NumberFormat value={ valoresPerdas.ultimos7dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> : <Text> - </Text> }
               </Text>
               </View>
               </View>
@@ -153,7 +158,7 @@ export default function Perdas(props) {
                 R$
               </Text>
               <Text style={styles.valor}>
-                <NumberFormat value={ valoresPerdas.ultimos35dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
+                { valoresPerdas.ultimos35dias ? <NumberFormat value={ valoresPerdas.ultimos35dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> : <Text> - </Text> }
               </Text>
               </View>
               </View>
@@ -168,12 +173,20 @@ export default function Perdas(props) {
               <Text style={styles.subtitulo}>
                 nas perdas totais semanais
               </Text>
-              <View style={styles.grafico}>
-                <Participacaoperdas valoresPerdasLojasSemanal={valoresPerdasLojasSemanal}/>
-              </View>
-              <View style={styles.tabela}>
-                <Listalojas valoresPerdasLojasSemanal={valoresPerdasLojasSemanal}/>
-              </View>
+
+              { valoresPerdasLojasSemanal.length > 1 ? 
+                <View>
+                  <View style={styles.grafico}>
+                    <Participacaoperdas valoresPerdasLojasSemanal={valoresPerdasLojasSemanal}/>
+                  </View>
+                  <View style={styles.tabela}>
+                    <Listalojas valoresPerdasLojasSemanal={valoresPerdasLojasSemanal}/> 
+                  </View>
+                </View> : 
+                <View style={{paddingVertical: 8}}>
+                  <Text style={styles.textoInformativoSemDados}>Não há dados para serem exibidos!</Text>
+                </View> }
+
             </View>
 
         </SafeAreaView>

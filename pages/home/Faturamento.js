@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
       fontFamily: 'TitilliumWeb',
     },
     variacao:{
-      fontSize: 26,
+      fontSize: 28,
       color: '#032639',
       marginLeft: 0,
       marginTop: 0,
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     },
     grafico2:{
       backgroundColor: '#FFF',
+      zIndex: 1,
       marginTop: 5,
       height: 150,
       marginBottom: 0,
@@ -242,11 +243,11 @@ export default function Faturamento(props) {
               <Text style={styles.titulocard}>
                 Variação Percentual Faturamento
               </Text>
-              <View style={{flex: 1, flexDirection: 'row'}}>
-              <Card size={60} icon="chevron-up" />
-              <Text style={styles.variacao}>
-                <NumberFormat value={ valoresFaturamentoVariacao.fatperc2 } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> %
-              </Text>
+              <View style={{flex: 1, flexDirection: 'row', marginBottom: -8, zIndex: 3}}>
+                <Card size={60} icon="chevron-up" />
+                <Text style={styles.variacao}>
+                  <NumberFormat value={ valoresFaturamentoVariacao.fatperc2 } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> %
+                </Text>
               </View>
               <View style={styles.grafico2}>
                 <Percentualfaturamento valoresFaturamentoGrafico={valoresFaturamentoGrafico}/>

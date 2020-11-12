@@ -79,6 +79,25 @@ const styles = StyleSheet.create({
 
 export default props => {
 
+  const mostrarIcone = (id) => {
+    switch(id) {
+      case 1:
+        return (<View style={styles.icone} />)
+
+      case 2:
+        return (<View style={styles.icone2} />)
+
+      case 3:
+        return (<View style={styles.icone3} />)
+
+      case 4:
+        return (<View style={styles.icone4} />)
+
+      default:
+        return (<View style={styles.icone5} />)
+    }
+  }
+
   let valoresFaturamentoLojasSemanal = props.valoresFaturamentoLojasSemanal || [];
   let [fontsLoaded] = useFonts({
     'TitilliumWeb': require('../../assets/fonts/TitilliumWeb-Regular.ttf'),
@@ -94,11 +113,7 @@ export default props => {
         { valoresFaturamentoLojasSemanal.map((valor) => (
           <View style={{ flexDirection: 'row' }}>
             <View style={styles.barra}>
-              { valor.id === 1 ? <View style={styles.icone} /> : <View/>}
-              { valor.id === 2 ? <View style={styles.icone2} /> : <View/>}
-              { valor.id === 3 ? <View style={styles.icone3} /> : <View/>}
-              { valor.id === 4 ? <View style={styles.icone4} /> : <View/>}
-              { valor.id >= 5 ? <View style={styles.icone5} /> : <View/>}
+              { mostrarIcone(valor.id) }
             </View>
 
             <View style={styles.view}>
