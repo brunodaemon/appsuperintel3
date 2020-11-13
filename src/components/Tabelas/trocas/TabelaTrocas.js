@@ -29,7 +29,7 @@ export default props => {
 
   let valoresTrocasLojasSemanal = props.valoresTrocasLojasSemanal || [];
   let [fontsLoaded] = useFonts({
-    'TitilliumWeb': require('../../../assets/fonts/TitilliumWeb-Regular.ttf'),
+    'TitilliumWeb': require('../../../../assets/fonts/TitilliumWeb-Regular.ttf'),
   });
 
   if (!fontsLoaded) {

@@ -51,7 +51,7 @@ export default function Navbar(props){
   let nomeRede = props.nomeRede ? props.nomeRede : ' ';
 
   let [fontsLoaded] = useFonts({
-    'TitilliumWebBold': require('../assets/fonts/TitilliumWeb-Bold.ttf'),
+    'TitilliumWebBold': require('../../assets/fonts/TitilliumWeb-Bold.ttf'),
   });
 
   if (!fontsLoaded) {
@@ -65,7 +65,7 @@ export default function Navbar(props){
             <View style={styles.navBar}>
               <Image
               style={styles.logo}
-              source={require('../assets/icones/superintel_branco.png')}/>
+              source={require('../../assets/icones/superintel_branco.png')}/>
             </View>
           </View>
           <View style={styles.fundocardtop}>

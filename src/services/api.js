@@ -2,15 +2,8 @@ import axios from 'axios'
 
 const apiUrl = `https://dev-api.superintel.systems`;
 
-export const Api_GET = async (url) => {
-  let dataList = [];
-  let apiUrl = url
-
-  const response = await fetch("https://dev-api.superintel.systems/" + apiUrl);
-  let data = await response.json();
-  dataList.push(data)
-
-  return dataList;
+export const get = (endpoint) => {
+    return axios.get(`${apiUrl}/${endpoint}`)
 }
 
 export const Api_PATCH = async (apiUrl, body) => {
@@ -45,9 +38,4 @@ export const Api_PATCH = async (apiUrl, body) => {
             response.json();
             console.log(response);
             })
-}
-
-
-export const get = (endpoint) => {
-    return axios.get(`${apiUrl}/${endpoint}`)
 }

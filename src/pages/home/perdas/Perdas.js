@@ -12,7 +12,7 @@ import TabelaPerdas from  '../../../components/Tabelas/perdas/TabelaPerdas';
 
 import { PerdasStyles as styles } from './PerdasStyles';
 import { getTotalizadoresPerdas, 
-  getTabelaPerdas } from './../../../Services/home/PerdasApi'
+  getTabelaPerdas } from './../../../services/home/PerdasApi'
 
 const Perdas = () => {
 
@@ -63,9 +63,9 @@ const Perdas = () => {
   }, []);
 
   let [fontsLoaded] = useFonts({
-    'TitilliumWeb': require('../../../assets/fonts/TitilliumWeb-Regular.ttf'),
-    'TitilliumWebBold': require('../../../assets/fonts/TitilliumWeb-Bold.ttf'),
-    'TitilliumWebLight': require('../../../assets/fonts/TitilliumWeb-Light.ttf'),
+    'TitilliumWeb': require('../../../../assets/fonts/TitilliumWeb-Regular.ttf'),
+    'TitilliumWebBold': require('../../../../assets/fonts/TitilliumWeb-Bold.ttf'),
+    'TitilliumWebLight': require('../../../../assets/fonts/TitilliumWeb-Light.ttf'),
   });
 
   const renderTotalizadoresPerda = () => {

@@ -25,9 +25,9 @@ const styles = StyleSheet.create({
 function Drawer({...props}){
 
   let [fontsLoaded] = useFonts({
-    'TitilliumWeb': require('../assets/fonts/TitilliumWeb-Regular.ttf'),
-    'TitilliumWebBold': require('../assets/fonts/TitilliumWeb-Bold.ttf'),
-    'TitilliumWebLight': require('../assets/fonts/TitilliumWeb-Light.ttf'),
+    'TitilliumWeb': require('../../assets/fonts/TitilliumWeb-Regular.ttf'),
+    'TitilliumWebBold': require('../../assets/fonts/TitilliumWeb-Bold.ttf'),
+    'TitilliumWebLight': require('../../assets/fonts/TitilliumWeb-Light.ttf'),
   });
 
   if (!fontsLoaded) {

@@ -4,7 +4,7 @@ import { useFonts } from 'expo-font';
 import { AppLoading } from 'expo';
 import NumberFormat from 'react-number-format';
 
-import { TabelaFaturamentoStyles as styles } from './TabelaFaturamentoStyles';
+import { TabelaPerdasStyles as styles } from './TabelaPerdasStyles';
 
 export default props => {
 
@@ -26,10 +26,10 @@ export default props => {
         return (<View style={styles.icone5} />)
     }
   }
-
-  let valoresFaturamentoLojasSemanal = props.valoresFaturamentoLojasSemanal || [];
+  
+  let valoresPerdasLojasSemanal = props.valoresPerdasLojasSemanal || [];
   let [fontsLoaded] = useFonts({
-    'TitilliumWeb': require('../../../assets/fonts/TitilliumWeb-Regular.ttf'),
+    'TitilliumWeb': require('../../../../assets/fonts/TitilliumWeb-Regular.ttf'),
   });
 
   if (!fontsLoaded) {
@@ -38,8 +38,7 @@ export default props => {
 
     return (
       <View style={styles.container}>
-          
-        { valoresFaturamentoLojasSemanal.map((valor) => (
+        { valoresPerdasLojasSemanal.map((valor) => (
           <View style={styles.linhaTabela}>
             <View style={styles.barra}>
               { mostrarIcone(valor.id) }
@@ -47,27 +46,27 @@ export default props => {
 
             <View style={styles.colunaLoja}>
               <Text style={styles.texto}>
-                { valor.loja }
+                { valor.apelidoloja }
               </Text>
             </View>
 
             <View style={styles.colunaValor}>
               <Text style={styles.texto}>
-                R$ <NumberFormat value={ valor.faturamento } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
+                R$ <NumberFormat value={ valor.vlrperdas } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
               </Text>
             </View>
 
             <View style={styles.colunaPorcentagem}>
               <Text style={styles.texto}>
-                <NumberFormat value={ (valor.porcentagem * 100) } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> %
+                <NumberFormat value={ valor.percperdas } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> %
               </Text>
             </View>
           </View>
         ))}
-       
-      </View>
+    
+    </View>
     )
 
-  }
+}
 
 };

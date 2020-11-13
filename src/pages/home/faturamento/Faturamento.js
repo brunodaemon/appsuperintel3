@@ -17,7 +17,7 @@ import { getTotalizadoresFaturamento,
   getVariacaoPercentual,
   getComprasVendasRedeSemanal,
   getGraficoLinhaSemanal,
-  getTabelaFaturamentoSemanal } from './../../../Services/home/FaturamentoApi'
+  getTabelaFaturamentoSemanal } from './../../../services/home/FaturamentoApi'
 
 const Faturamento = () => {
 
@@ -118,9 +118,9 @@ const Faturamento = () => {
   }, []);
 
   let [fontsLoaded] = useFonts({
-    'TitilliumWeb': require('../../../assets/fonts/TitilliumWeb-Regular.ttf'),
-    'TitilliumWebBold': require('../../../assets/fonts/TitilliumWeb-Bold.ttf'),
-    'TitilliumWebLight': require('../../../assets/fonts/TitilliumWeb-Light.ttf'),
+    'TitilliumWeb': require('../../../../assets/fonts/TitilliumWeb-Regular.ttf'),
+    'TitilliumWebBold': require('../../../../assets/fonts/TitilliumWeb-Bold.ttf'),
+    'TitilliumWebLight': require('../../../../assets/fonts/TitilliumWeb-Light.ttf'),
   });
 
   const renderTotalizadoresRede = () => {
