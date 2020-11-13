@@ -1,7 +1,7 @@
 import React from 'react'
 import { StackedBarChart } from 'react-native-svg-charts'
  
-class Participacaofaturamento extends React.PureComponent {
+class BarraParticipacaoFaturamento extends React.PureComponent {
     render() {
         let valoresFaturamentoLojasSemanal = this.props.valoresFaturamentoLojasSemanal || [];
         let valoresLojas = {
@@ -55,4 +55,4 @@ class Participacaofaturamento extends React.PureComponent {
     }
 }
 
-export default Participacaofaturamento
+export default BarraParticipacaoFaturamento

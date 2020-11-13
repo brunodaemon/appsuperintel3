@@ -18,7 +18,7 @@ export const FaturamentoStyles = StyleSheet.create({
       fontFamily: 'TitilliumWeb',
     },
     variacao:{
-      fontSize: 28,
+      fontSize: 26,
       color: '#032639',
       marginLeft: 0,
       marginTop: 0,

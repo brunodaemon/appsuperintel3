@@ -3,8 +3,8 @@ import { View,
          Text,
          SafeAreaView, 
 } from 'react-native';
-import Participacaoperdas from  '../../../components/Graficos/Participacaoperdas';
-import Listalojas from  '../../../components/Tabelas/Participacaoperdas';
+import Participacaoperdas from  '../../../components/Graficos/perdas/BarraParticipacaoPerdas';
+import Listalojas from  '../../../components/Tabelas/perdas/TabelaPerdas';
 import { useFonts } from 'expo-font';
 import { AppLoading } from 'expo';
 import NumberFormat from 'react-number-format';

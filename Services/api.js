@@ -1,9 +1,9 @@
-import React from 'react';
+import axios from 'axios'
+
+const apiUrl = `https://dev-api.superintel.systems`;
 
 export const Api_GET = async (url) => {
   let dataList = [];
-  let currentPage = 0;
-  let morePagesAvailable = true;
   let apiUrl = url
 
   const response = await fetch("https://dev-api.superintel.systems/" + apiUrl);
@@ -45,22 +45,9 @@ export const Api_PATCH = async (apiUrl, body) => {
             response.json();
             console.log(response);
             })
-        }
+}
 
 
-export const Api2 = async (url) => {
-  let dataList = [];
-  let currentPage = 0;
-  let morePagesAvailable = true;
-  let apiUrl = url
-
-  while(morePagesAvailable){
-      const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-      const response = await fetch(proxyUrl + apiUrl);
-      let data = await response.json();
-      dataList.push(data)
-      apiUrl = data.next
-      morePagesAvailable = apiUrl !== null
-  }
-  return dataList;
+export const get = (endpoint) => {
+    return axios.get(`${apiUrl}/${endpoint}`)
 }

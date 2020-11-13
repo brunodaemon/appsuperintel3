@@ -6,13 +6,11 @@ import { AppLoading } from 'expo';
 
 import NumberFormat from 'react-number-format';
 
-
 const styles = StyleSheet.create({
     container:{
         flex:1,
         backgroundColor: '#FFF',
         marginTop: 5,
-        height: 'auto'
     },
     barra:{
         width: 50,
@@ -43,28 +41,28 @@ const styles = StyleSheet.create({
         height: 10,
         width: 20,
         borderRadius: 10,
-        backgroundColor: '#D61D00',
+        backgroundColor: '#021017',
         marginLeft: 20,
     },
     icone2:{
         height: 10,
         width: 20,
         borderRadius: 10,
-        backgroundColor: '#FF7700',
+        backgroundColor: '#153354',
         marginLeft: 20,
     },
     icone3:{
         height: 10,
         width: 20,
         borderRadius: 10,
-        backgroundColor: '#FFA200',
+        backgroundColor: '#175A9C',
         marginLeft: 20,
     },
     icone4:{
         height: 10,
         width: 20,
         borderRadius: 10,
-        backgroundColor: '#F9DC1F',
+        backgroundColor: '#3883C9',
         marginLeft: 20,
     },
     icone5:{
@@ -98,19 +96,19 @@ export default props => {
         return (<View style={styles.icone5} />)
     }
   }
-  
-  let valoresPerdasLojasSemanal = props.valoresPerdasLojasSemanal || [];
+
+  let valoresTrocasLojasSemanal = props.valoresTrocasLojasSemanal || [];
   let [fontsLoaded] = useFonts({
-    'TitilliumWeb': require('../../assets/fonts/TitilliumWeb-Regular.ttf'),
+    'TitilliumWeb': require('../../../assets/fonts/TitilliumWeb-Regular.ttf'),
   });
 
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
 
-  return (
-    <View style={styles.container}>
-      { valoresPerdasLojasSemanal.map((valor) => (
+    return (
+      <View style={styles.container}>
+      { valoresTrocasLojasSemanal.map((valor) => (
         <View style={{ flexDirection: 'row' }}>
           <View style={styles.barra}>
             { mostrarIcone(valor.id) }
@@ -124,13 +122,13 @@ export default props => {
 
           <View style={styles.view2}>
             <Text style={styles.texto}>
-              R$ <NumberFormat value={ valor.vlrperdas } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
+              R$ <NumberFormat value={ valor.vlrtrocas } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>
             </Text>
           </View>
 
           <View style={styles.view3}>
             <Text style={styles.texto}>
-              <NumberFormat value={ valor.percperdas } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> %
+              <NumberFormat value={ valor.perctrocas } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> %
             </Text>
           </View>
         </View>

@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { View,
-         Text, 
-         StyleSheet, 
+         Text,
          SafeAreaView, 
 } from 'react-native';
-import Totaltrocas from '../../../components/Graficos/Totaltrocas';
-import Participacaotrocas from  '../../../components/Graficos/Participacaotrocas';
-import Listalojas from  '../../../components/Tabelas/Participacaotrocas';
+import Participacaotrocas from  '../../../components/Graficos/trocas/BarraParticipacaoTrocas';
+import Listalojas from  '../../../components/Tabelas/trocas/TabelaTrocas';
 import { useFonts } from 'expo-font';
 import { AppLoading } from 'expo';
 import { TrocasStyles as styles } from './TrocasStyles';

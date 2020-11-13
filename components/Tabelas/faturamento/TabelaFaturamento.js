@@ -19,12 +19,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   view: {
-    width: 140,
+    width: 120,
     height: 32,
     justifyContent: 'center',
   },
   view2: {
-    width: 140,
+    width: 120,
     height: 32,
     justifyContent: 'center',
   },
@@ -100,7 +100,7 @@ export default props => {
 
   let valoresFaturamentoLojasSemanal = props.valoresFaturamentoLojasSemanal || [];
   let [fontsLoaded] = useFonts({
-    'TitilliumWeb': require('../../assets/fonts/TitilliumWeb-Regular.ttf'),
+    'TitilliumWeb': require('../../../assets/fonts/TitilliumWeb-Regular.ttf'),
   });
 
   if (!fontsLoaded) {

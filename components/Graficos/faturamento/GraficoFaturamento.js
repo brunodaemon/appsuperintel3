@@ -2,7 +2,7 @@ import React from 'react';
 import { LineChart, YAxis, Grid, XAxis } from 'react-native-svg-charts';
 import { View } from 'react-native';
 
-class Percentualfaturamento extends React.PureComponent {
+class GraficoFaturamento extends React.PureComponent {
     render() {
         let valoresFaturamentoGrafico = this.props.valoresFaturamentoGrafico;
         let data = []
@@ -54,4 +54,4 @@ class Percentualfaturamento extends React.PureComponent {
         )
     }
 }
-export default Percentualfaturamento
+export default GraficoFaturamento
