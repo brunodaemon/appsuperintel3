@@ -64,48 +64,49 @@ export const FaturamentoStyles = StyleSheet.create({
       marginRight: -10,
       borderRadius: 10,
     },
-    card1:{
+    cardTotalizadoresRede:{
       backgroundColor: "#FFF",
       borderRadius: 10,
-      height: 100,
+      height: 'auto',
       marginTop: -15,
       padding: 20,
     },
-    card2:{
+    cardVariacaoPercentual:{
       backgroundColor: "#FFF",
       borderRadius: 10,
-      height: 240,
+      height: 'auto',
       marginTop: 15,
       padding: 20,
     },
-    card3:{
+    cardTabelaFaturamento:{
       backgroundColor: "#FFF",
       borderRadius: 10,
-      height: 350,
+      height: 'auto',
+      width: 'auto',
       marginTop: 15,
       marginBottom: 15,
       padding: 20,
     },
-    card4:{
+    cardComprasRede:{
       backgroundColor: "#FFF",
       borderRadius: 10,
-      height: 100,
+      height: 'auto',
       marginTop: 15,
       padding: 20,
       flex: 1,
     },
-    card5:{
+    cardVendasRede:{
       backgroundColor: "#FFF",
       borderRadius: 10,
-      height: 100,
+      height: 'auto',
       marginTop: 15,
       marginLeft: 15,
       padding: 20,
       flex: 1,
     },
     tabela:{
-        marginLeft: -20,
-        marginRight: -20,
-        height: 60,
+      marginLeft: -20,
+      marginRight: -20,
+      height: 'auto',
     },
 });

@@ -19,13 +19,13 @@ import { getTotalizadoresFaturamento,
   getGraficoLinhaSemanal,
   getTabelaFaturamentoSemanal } from './../../../Services/home/FaturamentoApi'
 
-const Faturamento = (props) => {
+const Faturamento = () => {
 
-  const [ valoresFaturamentoTotal, setValoresFaturamentoTotal ] = React.useState({});
-  const [ valoresFaturamentoVariacao, setValoresFaturamentoVariacao ] = React.useState({});
-  const [ valoresFaturamentoGrafico, setValoresFaturamentoGrafico ] = React.useState({});
-  const [ valoresFaturamentoComprasVendas, setValoresFaturamentoComprasVendas ] = React.useState({});
-  const [ valoresFaturamentoLojasSemanal, setValoresFaturamentoLojasSemanal ] = React.useState([]);
+  const [ valoresFaturamentoTotal, setValoresFaturamentoTotal ] = useState({});
+  const [ valoresFaturamentoVariacao, setValoresFaturamentoVariacao ] = useState({});
+  const [ valoresFaturamentoGrafico, setValoresFaturamentoGrafico ] = useState({});
+  const [ valoresFaturamentoComprasVendas, setValoresFaturamentoComprasVendas ] = useState({});
+  const [ valoresFaturamentoLojasSemanal, setValoresFaturamentoLojasSemanal ] = useState([]);
   
   const load = async () => {
     await getTotalizadoresFaturamento().then((data) => {
@@ -76,12 +76,15 @@ const Faturamento = (props) => {
       setValoresFaturamentoComprasVendas(valores);
     }, (error) => {
       console.error('ERROR -> ', error);
-      alert('Erro ao buscar Porcentagem de Variação');
+      alert('Erro ao buscar Totalizadores de Compras e Vendas');
     })
 
     await getGraficoLinhaSemanal().then((data) => {
       let result = data.data.results;
       setValoresFaturamentoGrafico(result);
+    }, (error) => {
+      console.error('ERROR -> ', error);
+      alert('Erro ao buscar Gráfico de Faturamento Semanal');
     })
 
     await getTabelaFaturamentoSemanal().then((data) => {
@@ -104,6 +107,9 @@ const Faturamento = (props) => {
         id += 1;
       })
       setValoresFaturamentoLojasSemanal(rows);
+    }, (error) => {
+      console.error('ERROR -> ', error);
+      alert('Erro ao buscar Tabela de Faturamento Semanal');
     })  
   }
   
@@ -119,7 +125,7 @@ const Faturamento = (props) => {
 
   const renderTotalizadoresRede = () => {
     return (              
-      <View style={styles.card1}>
+      <View style={styles.cardTotalizadoresRede}>
         <Text style={styles.titulocard}>
           Total Rede
         </Text>
@@ -160,7 +166,7 @@ const Faturamento = (props) => {
   const renderComprasVendasRede = () => {
     return(
     <View style={{flex: 1, flexDirection: 'row'}}>
-      <View style={styles.card4}>
+      <View style={styles.cardComprasRede}>
         <Text style={styles.titulocard}>
           Compras Rede
         </Text>
@@ -179,7 +185,7 @@ const Faturamento = (props) => {
         </View>
       </View>
 
-      <View style={styles.card5}>
+      <View style={styles.cardVendasRede}>
         <Text style={styles.titulocard}>
           Vendas Rede
         </Text>
@@ -203,7 +209,7 @@ const Faturamento = (props) => {
 
   const renderVariacaoPercentual = () => {
     return(
-      <View style={styles.card2}>
+      <View style={styles.cardVariacaoPercentual}>
       <Text style={styles.titulocard}>
         Variação Percentual Faturamento
       </Text>
@@ -225,7 +231,7 @@ const Faturamento = (props) => {
 
   const renderTabelaParticipacaoLojas = () => {
     return (
-      <View style={styles.card3}>
+      <View style={styles.cardTabelaFaturamento}>
         <Text style={styles.titulocard}>
           Participação das Lojas
         </Text>

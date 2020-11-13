@@ -55,25 +55,17 @@ export const PerdasStyles = StyleSheet.create({
       marginRight: -10,
       borderRadius: 10,
     },
-    card1:{
+    cardTotalizadoresPerda:{
       backgroundColor: "#FFF",
       borderRadius: 10,
-      height: 100,
+      height: 'auto',
       marginTop: -15,
       padding: 20,
     },
-    card6:{
+    cardTabelaPerda:{
       backgroundColor: "#FFF",
       borderRadius: 10,
-      height: 160,
-      marginTop: -15,
-      padding: 20,
-      flex: 1,
-    },
-    card8:{
-      backgroundColor: "#FFF",
-      borderRadius: 10,
-      height: 350,
+      height: 'auto',
       marginTop: 15,
       marginBottom: 15,
       padding: 20,
@@ -81,7 +73,7 @@ export const PerdasStyles = StyleSheet.create({
     tabela:{
         marginLeft: -20,
         marginRight:-20,
-        height: 60,
+        height: 'auto',
     },
     textoInformativoSemDados: {
       fontSize: 21,
