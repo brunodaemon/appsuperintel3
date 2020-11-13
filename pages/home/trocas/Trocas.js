@@ -53,7 +53,7 @@ const Trocas = () => {
         setValoresTrocasLojasSemanal(result);
       },(error) => {
         console.error('ERROR -> ', error);
-        alert('Erro ao buscar Totalizadores de Perdas');
+        alert('Erro ao buscar Tabela de Trocas');
       })
     }
     
