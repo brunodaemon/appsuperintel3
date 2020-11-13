@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, 
          SafeAreaView, 
          ScrollView,
 } from 'react-native';
-import NumberFormat from 'react-number-format';
 import Navbar from '../../components/Navbar';
-import Faturamento from './Faturamento';
-import Perdas from './Perdas';
-import Trocas from './Trocas';
+import Faturamento from './faturamento/Faturamento';
+import Perdas from './perdas/Perdas';
+import Trocas from './trocas/Trocas';
 
 import { Api_GET } from './../../Services/api';
 

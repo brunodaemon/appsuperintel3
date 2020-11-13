@@ -4,166 +4,14 @@ import { View,
          StyleSheet, 
          SafeAreaView, 
 } from 'react-native';
-import Totaltrocas from '../../components/Graficos/Totaltrocas';
-import Participacaotrocas from  '../../components/Graficos/Participacaotrocas';
-import Listalojas from  '../../components/Tabelas/Participacaotrocas';
+import Totaltrocas from '../../../components/Graficos/Totaltrocas';
+import Participacaotrocas from  '../../../components/Graficos/Participacaotrocas';
+import Listalojas from  '../../../components/Tabelas/Participacaotrocas';
 import { useFonts } from 'expo-font';
 import { AppLoading } from 'expo';
+import { TrocasStyles as styles } from './TrocasStyles';
 
 import NumberFormat from 'react-number-format';
-
-const styles = StyleSheet.create({
-    container:{
-      flex:1,
-      backgroundColor: '#EEEEEE',
-    },
-    Sessao:{
-      backgroundColor: '#1A4069',
-      borderRadius: 10,
-      height: 55,
-    },
-    nomesessao:{
-      fontSize: 18,
-      color: '#FFF',
-      marginLeft: 20,
-      marginTop: 8,
-      fontFamily: 'TitilliumWeb',
-    },
-    titulomotivo:{
-      fontSize: 17,
-      color: '#032639',
-      marginTop: 5,
-      fontFamily: 'TitilliumWeb',
-    },
-    titulocard:{
-      fontSize: 18,
-      color: '#707070',
-      marginTop: -8,
-      fontFamily: 'TitilliumWeb',
-    },
-    subtitulo:{
-      fontSize: 13,
-      color: '#707070',
-      fontFamily: 'TitilliumWeb',
-    },
-    subtitulo2:{
-      fontSize: 13,
-      color: '#707070',
-      marginTop: 14,
-      fontFamily: 'TitilliumWeb',
-    },
-    subtitulo3:{
-      fontSize: 13,
-      color: '#707070',
-      marginTop: 5,
-      fontFamily: 'TitilliumWeb',
-    },
-    R$:{
-      fontSize: 17,
-      color: '#032639',
-      marginTop: 4.5,
-      marginRight: 3,
-      fontFamily: 'TitilliumWebLight',
-    },
-    valor:{
-      fontSize: 21,
-      color: '#032639',
-      fontFamily: 'TitilliumWebBold',
-    },
-    R$troca:{
-      fontSize: 17,
-      color: '#032639',
-      marginTop: 1,
-      marginRight: 3,
-      marginLeft: 18,
-      fontFamily: 'TitilliumWebLight',
-    },
-    valortroca:{
-      fontSize: 21,
-      marginTop: -3.6,
-      color: '#032639',
-      fontFamily: 'TitilliumWebBold',
-    },
-    grafico:{
-      backgroundColor: '#FFF',
-      height: 40,
-      marginTop: 10,
-      marginBottom: 10,
-      marginLeft: -10,
-      marginRight: -10,
-      borderRadius: 10,
-    },
-    card1:{
-      backgroundColor: "#FFF",
-      borderRadius: 10,
-      height: 100,
-      marginTop: -15,
-      padding: 20,
-    },
-    card6:{
-      backgroundColor: "#FFF",
-      borderRadius: 10,
-      height: 160,
-      marginTop: -15,
-      padding: 20,
-      flex: 1,
-    },
-    card7:{
-      backgroundColor: "#FFF",
-      borderRadius: 10,
-      height: 350,
-      marginTop: 15,
-      marginBottom: 30,
-      padding: 20,
-    },
-    card9:{
-      backgroundColor: "#FFF",
-      borderRadius: 10,
-      height: 270,
-      marginTop: 15,
-      padding: 20,
-    },
-    circulo1:{
-      marginTop:2,
-      marginLeft: 0,
-      marginBottom:0,
-      marginRight:5,
-      height: 12,
-      width:12,
-      borderRadius:12,
-      backgroundColor: '#1A4069',
-    },
-    circulo2:{
-      marginTop:8,
-      marginLeft: 0,
-      marginBottom:0,
-      marginRight:5,
-      height: 12,
-      width:12,
-      borderRadius:12,
-      backgroundColor: '#00E152',
-    },
-    circulo3:{
-      marginTop:2,
-      marginLeft: 0,
-      marginBottom:0,
-      marginRight:5,
-      height: 12,
-      width:12,
-      borderRadius:12,
-      backgroundColor: '#3883C9',
-    },
-    tabela:{
-        marginLeft: -20,
-        marginRight:-20,
-        height: 60,
-    },
-    textoInformativoSemDados:{
-      fontSize: 21,
-      color: '#032639',
-      fontFamily: 'TitilliumWebBold',
-    }
-  });
 
 export default function Trocas(props) {
 
@@ -175,9 +23,9 @@ export default function Trocas(props) {
     let valoresTrocasLojasSemanal = props.valoresTrocasLojasSemanal || [];
 
     let [fontsLoaded] = useFonts({
-      'TitilliumWeb': require('../../assets/fonts/TitilliumWeb-Regular.ttf'),
-      'TitilliumWebBold': require('../../assets/fonts/TitilliumWeb-Bold.ttf'),
-      'TitilliumWebLight': require('../../assets/fonts/TitilliumWeb-Light.ttf'),
+      'TitilliumWeb': require('../../../assets/fonts/TitilliumWeb-Regular.ttf'),
+      'TitilliumWebBold': require('../../../assets/fonts/TitilliumWeb-Bold.ttf'),
+      'TitilliumWebLight': require('../../../assets/fonts/TitilliumWeb-Light.ttf'),
     });
   
     if (!fontsLoaded) {
