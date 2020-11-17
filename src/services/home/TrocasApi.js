@@ -3,7 +3,7 @@ import { get } from '../api';
 const CNPJ_MATRIZ = `4686827000151`;
 
 export async function getTotalizadoresTrocas() { 
-    return await get(`cardtrocas/tfcard/?cnpjmatriz=${CNPJ_MATRIZ}`);
+    return await get(`app001/app001-card-trocas-recebidas-7dd-35dd/`);
 }
 
 export async function getTotalizadoresEstoqueTrocas() { 
