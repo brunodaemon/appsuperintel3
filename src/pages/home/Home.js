@@ -5,6 +5,7 @@ import Navbar from '../../components/Navbar';
 import Faturamento from './faturamento/Faturamento';
 import Perdas from './perdas/Perdas';
 import Trocas from './trocas/Trocas';
+import EstoqueTrocas from './estoqueTrocas/EstoqueTrocas';
 
 import { HomeStyles as styles } from './HomeStyles';
 
@@ -16,6 +17,7 @@ export default function Home() {
           <Navbar nomeRede={nomeRede} style={styles.Navbar}/>
           <ScrollView style={styles.containerscroll}>
             <Faturamento />
+            <EstoqueTrocas />
             <Perdas />
             <Trocas />
           </ScrollView>

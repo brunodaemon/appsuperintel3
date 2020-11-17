@@ -171,9 +171,7 @@ const Faturamento = () => {
           Compras Rede
         </Text>
         <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
-          <Text style={styles.subtitulo}>
-            valor semanal
-          </Text>
+          <Text style={styles.subtitulo}>esta semana</Text>
           <View style={{flexDirection: 'row'}}>
             <Text style={styles.R$}>
               R$
@@ -190,9 +188,7 @@ const Faturamento = () => {
           Vendas Rede
         </Text>
         <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
-          <Text style={styles.subtitulo}>
-            valor semanal
-          </Text>
+          <Text style={styles.subtitulo}>esta semana</Text>
           <View style={{flexDirection: 'row'}}>
             <Text style={styles.R$}>
               R$
@@ -211,8 +207,9 @@ const Faturamento = () => {
     return(
       <View style={styles.cardVariacaoPercentual}>
       <Text style={styles.titulocard}>
-        Variação Percentual Faturamento
+        Variação Percentual
       </Text>
+      <Text style={styles.subtitulo}>faturamento diário</Text>
       <View style={{flex: 1, flexDirection: 'row', marginBottom: -8, zIndex: 3}}>
         <Card size={60} icon="chevron-up" />
         <Text style={styles.variacao}>
