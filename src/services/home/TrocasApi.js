@@ -15,5 +15,5 @@ export async function getTabelaTrocas() {
 }
 
 export async function getTabelaEstoqueTrocas() {
-    return await get(`app001/app001-tabela-trocas-por-loja-com-percentuais/`);
+    return await get(`app001/app001-tabela-estoque2-por-loja-com-percentuais/`);
 }

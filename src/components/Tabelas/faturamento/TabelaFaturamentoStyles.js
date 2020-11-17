@@ -4,7 +4,8 @@ export const TabelaFaturamentoStyles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#FFF',
-      marginTop: 5
+      marginTop: 5,
+      height: 'auto'
     },
     barra: {
         width: 50,

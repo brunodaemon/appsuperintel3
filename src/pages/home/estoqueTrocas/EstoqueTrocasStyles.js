@@ -99,7 +99,7 @@ export const TrocasStyles = StyleSheet.create({
     tabela:{
         marginLeft: -20,
         marginRight:-20,
-        height: 60,
+        height: 'auto',
     },
     textoInformativoSemDados:{
       fontSize: 21,

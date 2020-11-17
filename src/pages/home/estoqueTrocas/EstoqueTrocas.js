@@ -7,14 +7,14 @@ import { useFonts } from 'expo-font';
 import { AppLoading } from 'expo';
 import NumberFormat from 'react-number-format';
 
-import BarraParticipacaoTrocas from  '../../../components/Graficos/trocas/BarraParticipacaoTrocas';
-import TabelaTrocas from  '../../../components/Tabelas/trocas/TabelaTrocas';
+import BarraParticipacaoEstoqueTrocas from  '../../../components/Graficos/estoqueTrocas/BarraParticipacaoEstoqueTrocas';
+import TabelaEstoqueTrocas from  '../../../components/Tabelas/estoqueTrocas/TabelaEstoqueTrocas';
 
 import { TrocasStyles as styles } from './EstoqueTrocasStyles';
 import { getTotalizadoresEstoqueTrocas, 
   getTabelaEstoqueTrocas } from '../../../services/home/TrocasApi'
 
-const Trocas = () => {
+const EstoqueTrocas = () => {
 
     const [ valoresTrocas, setValoresTrocas ] = useState({});
     const [ valoresTrocasLojasSemanal, setValoresTrocasLojasSemanal ] = useState([]);
@@ -125,10 +125,10 @@ const Trocas = () => {
           { valoresTrocasLojasSemanal.length > 1 ? 
             <View>
               <View style={styles.grafico}>
-                <BarraParticipacaoTrocas valoresTrocasLojasSemanal={valoresTrocasLojasSemanal}/>
+                <BarraParticipacaoEstoqueTrocas valoresTrocasLojasSemanal={valoresTrocasLojasSemanal}/>
               </View>
               <View style={styles.tabela}>
-                <TabelaTrocas valoresTrocasLojasSemanal={valoresTrocasLojasSemanal}/> 
+                <TabelaEstoqueTrocas valoresTrocasLojasSemanal={valoresTrocasLojasSemanal}/> 
               </View>
             </View> : 
             <View style={{paddingVertical: 8}}>
@@ -151,4 +151,4 @@ const Trocas = () => {
   )}
 };
 
-export default Trocas;
+export default EstoqueTrocas;
