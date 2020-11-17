@@ -7,8 +7,8 @@ import { useFonts } from 'expo-font';
 import { AppLoading } from 'expo';
 import NumberFormat from 'react-number-format';
 
-import BarraParticipacaoPerdas from  '../../../components/Graficos/perdas/BarraParticipacaoPerdas';
-import TabelaPerdas from  '../../../components/Tabelas/perdas/TabelaPerdas';
+import BarraParticipacao from  '../../../components/Graficos/BarraParticipacao';
+import TabelaParticipacao from  '../../../components/Tabelas/TabelaParticipacao';
 
 import { PerdasStyles as styles } from './PerdasStyles';
 import { getTotalizadoresPerdas, 
@@ -45,13 +45,16 @@ const Perdas = () => {
 
     await getTabelaPerdas().then((data) => {
       let result = data.data.results;
+      let rows = [];
+
       result.sort((a, b) => {return parseFloat(b.vlrperdas) - parseFloat(a.vlrperdas)});
       let id = 1;
-      result.forEach((row) => {
-        row.id = id
+      result.forEach((valor) => {
+        valor.id = id
         id += 1;
+        rows.push({id: valor.id, nomeLoja: valor.apelidoloja, cnpj: valor.cnpjloja, valor: parseFloat(valor.vlrperdas), porcentagem: parseFloat(valor.percperdas)});
       })
-      setValoresPerdasLojasSemanal(result);
+      setValoresPerdasLojasSemanal(rows);
     },(error) => {
       console.error('ERROR -> ', error);
       alert('Erro ao buscar Tabela de Perdas');
@@ -121,10 +124,14 @@ const Perdas = () => {
         { valoresPerdasLojasSemanal.length > 1 ? 
           <View>
             <View style={styles.grafico}>
-              <BarraParticipacaoPerdas valoresPerdasLojasSemanal={valoresPerdasLojasSemanal}/>
+              <BarraParticipacao
+                valores={valoresPerdasLojasSemanal}
+                colors={['#D61D00', '#FF7700', '#FFA200', '#F9DC1F', '#C5C5C5']}/>
             </View>
             <View style={styles.tabela}>
-              <TabelaPerdas valoresPerdasLojasSemanal={valoresPerdasLojasSemanal}/> 
+              <TabelaParticipacao
+                valores={valoresPerdasLojasSemanal}
+                colors={['#D61D00', '#FF7700', '#FFA200', '#F9DC1F', '#C5C5C5']}/> 
             </View>
           </View> : 
           <View style={{paddingVertical: 8}}>

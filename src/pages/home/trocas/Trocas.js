@@ -7,8 +7,8 @@ import { useFonts } from 'expo-font';
 import { AppLoading } from 'expo';
 import NumberFormat from 'react-number-format';
 
-import BarraParticipacaoTrocas from  '../../../components/Graficos/trocas/BarraParticipacaoTrocas';
-import TabelaTrocas from  '../../../components/Tabelas/trocas/TabelaTrocas';
+import BarraParticipacao from  '../../../components/Graficos/BarraParticipacao';
+import TabelaParticipacao from  '../../../components/Tabelas/TabelaParticipacao';
 
 import { TrocasStyles as styles } from './TrocasStyles';
 import { getTotalizadoresTrocas, 
@@ -44,13 +44,16 @@ const Trocas = () => {
 
       await getTabelaTrocas().then((data) => {
         let result = data.data.results;
+        let rows = [];
+
         result.sort((a, b) => {return parseFloat(b.vlrtrocas) - parseFloat(a.vlrtrocas)});
         let id = 1;
-        result.forEach((row) => {
-          row.id = id
+        result.forEach((valor) => {
+          valor.id = id
           id += 1;
+          rows.push({id: valor.id, nomeLoja: valor.apelidoloja, cnpj: valor.cnpjloja, valor: parseFloat(valor.vlrtrocas), porcentagem: parseFloat(valor.perctrocas)});
         })
-        setValoresTrocasLojasSemanal(result);
+        setValoresTrocasLojasSemanal(rows);
       },(error) => {
         console.error('ERROR -> ', error);
         alert('Erro ao buscar Tabela de Trocas');
@@ -125,10 +128,14 @@ const Trocas = () => {
           { valoresTrocasLojasSemanal.length > 1 ? 
             <View>
               <View style={styles.grafico}>
-                <BarraParticipacaoTrocas valoresTrocasLojasSemanal={valoresTrocasLojasSemanal}/>
+                <BarraParticipacao 
+                  valores={valoresTrocasLojasSemanal}
+                  colors={['#021017', '#153354', '#175A9C', '#3883C9', '#C5C5C5']}/>
               </View>
               <View style={styles.tabela}>
-                <TabelaTrocas valoresTrocasLojasSemanal={valoresTrocasLojasSemanal}/> 
+                <TabelaParticipacao 
+                  valores={valoresTrocasLojasSemanal}
+                  colors={['#021017', '#153354', '#175A9C', '#3883C9', '#C5C5C5']}/> 
               </View>
             </View> : 
             <View style={{paddingVertical: 8}}>

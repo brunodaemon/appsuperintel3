@@ -8,16 +8,17 @@ import { AppLoading } from 'expo';
 import { Card } from 'react-native-paper';
 import NumberFormat from 'react-number-format';
 
-import BarraParticipacaoFaturamento from  '../../../components/Graficos/faturamento/BarraParticipacaoFaturamento';
-import GraficoFaturamento from  '../../../components/Graficos/faturamento/GraficoFaturamento';
-import TabelaFaturamento from  '../../../components/Tabelas/faturamento/TabelaFaturamento';
-
 import { FaturamentoStyles as styles } from './FaturamentoStyles';
 import { getTotalizadoresFaturamento, 
   getVariacaoPercentual,
   getComprasVendasRedeSemanal,
   getGraficoLinhaSemanal,
-  getTabelaFaturamentoSemanal } from './../../../services/home/FaturamentoApi'
+  getTabelaFaturamentoSemanal } from './../../../services/home/FaturamentoApi';
+
+import GraficoFaturamento from  '../../../components/Graficos/faturamento/GraficoFaturamento';
+
+import TabelaParticipacao from '../../../components/Tabelas/TabelaParticipacao';
+import BarraParticipacao from  '../../../components/Graficos/BarraParticipacao';
 
 const Faturamento = () => {
 
@@ -90,22 +91,25 @@ const Faturamento = () => {
     await getTabelaFaturamentoSemanal().then((data) => {
       let result = data.data.results;
       let rows = [];
-        let total = 0;
-        if(result) {
-          result.forEach((valor) => {
-            total += parseFloat(valor.faturamento7dd);
-          });
+      let total = 0;
 
-          result.forEach((valor) => {
-            rows.push({loja: valor.apelidoloja, cnpj: valor.cnpjloja, faturamento: parseFloat(valor.faturamento7dd), porcentagem: (parseFloat(valor.faturamento7dd) / total)});
-          })
-        }
-      rows.sort((a, b) => {return b.faturamento - a.faturamento});
+      if(result) {
+        result.forEach((valor) => {
+          total += parseFloat(valor.faturamento7dd);
+        });
+
+        result.forEach((valor) => {
+          rows.push({nomeLoja: valor.apelidoloja, cnpj: valor.cnpjloja, valor: parseFloat(valor.faturamento7dd), porcentagem: (parseFloat(valor.faturamento7dd) / total)});
+        })
+      }
+
+      rows.sort((a, b) => {return b.valor - a.valor});
       let id = 1;
       rows.forEach((row) => {
         row.id = id
         id += 1;
       })
+
       setValoresFaturamentoLojasSemanal(rows);
     }, (error) => {
       console.error('ERROR -> ', error);
@@ -236,10 +240,14 @@ const Faturamento = () => {
           no faturamento total semanal
         </Text>
         <View style={styles.grafico}>
-          <BarraParticipacaoFaturamento valoresFaturamentoLojasSemanal={valoresFaturamentoLojasSemanal}/>
+          <BarraParticipacao           
+            valores={valoresFaturamentoLojasSemanal}
+            colors={['#021704', '#15541D', '#179C32', '#00E152',  '#C5C5C5']}/>
         </View>
         <View style={styles.tabela}>
-          <TabelaFaturamento valoresFaturamentoLojasSemanal={valoresFaturamentoLojasSemanal}/> 
+          <TabelaParticipacao 
+            valores={valoresFaturamentoLojasSemanal}
+            colors={['#021704', '#15541D', '#179C32', '#00E152',  '#C5C5C5']}/> 
         </View>
       </View>
     )

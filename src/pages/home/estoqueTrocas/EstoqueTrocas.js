@@ -7,12 +7,12 @@ import { useFonts } from 'expo-font';
 import { AppLoading } from 'expo';
 import NumberFormat from 'react-number-format';
 
-import BarraParticipacaoEstoqueTrocas from  '../../../components/Graficos/estoqueTrocas/BarraParticipacaoEstoqueTrocas';
-import TabelaEstoqueTrocas from  '../../../components/Tabelas/estoqueTrocas/TabelaEstoqueTrocas';
+import BarraParticipacao from  '../../../components/Graficos/BarraParticipacao';
+import TabelaParticipacao from  '../../../components/Tabelas/TabelaParticipacao';
 
 import { TrocasStyles as styles } from './EstoqueTrocasStyles';
 import { getTotalizadoresEstoqueTrocas, 
-  getTabelaEstoqueTrocas } from '../../../services/home/TrocasApi'
+  getTabelaEstoqueTrocas } from '../../../services/home/TrocasApi';
 
 const EstoqueTrocas = () => {
 
@@ -44,13 +44,17 @@ const EstoqueTrocas = () => {
 
       await getTabelaEstoqueTrocas().then((data) => {
         let result = data.data.results;
+        let rows = [];
+
         result.sort((a, b) => {return parseFloat(b.vlrtrocas) - parseFloat(a.vlrtrocas)});
         let id = 1;
-        result.forEach((row) => {
-          row.id = id
+        result.forEach((valor) => {
+          console.log(valor);
+          valor.id = id
           id += 1;
+          rows.push({id: valor.id, nomeLoja: valor.apelidoloja, cnpj: valor.cnpjloja, valor: parseFloat(valor.vlrestoque2), porcentagem: parseFloat(valor.percestoque2)});
         })
-        setValoresTrocasLojasSemanal(result);
+        setValoresTrocasLojasSemanal(rows);
       },(error) => {
         console.error('ERROR -> ', error);
         alert('Erro ao buscar Tabela de Trocas');
@@ -122,13 +126,17 @@ const EstoqueTrocas = () => {
           <Text style={styles.subtitulo}>
             no envio de produtos para trocas
           </Text>
-          { valoresTrocasLojasSemanal.length > 1 ? 
+          { valoresTrocasLojasSemanal.length > 0 ? 
             <View>
               <View style={styles.grafico}>
-                <BarraParticipacaoEstoqueTrocas valoresTrocasLojasSemanal={valoresTrocasLojasSemanal}/>
+                <BarraParticipacao 
+                  valores={valoresTrocasLojasSemanal}
+                  colors={['#021017', '#153354', '#175A9C', '#3883C9', '#C5C5C5']}/>
               </View>
               <View style={styles.tabela}>
-                <TabelaEstoqueTrocas valoresTrocasLojasSemanal={valoresTrocasLojasSemanal}/> 
+                <TabelaParticipacao 
+                  valores={valoresTrocasLojasSemanal}
+                  colors={['#021017', '#153354', '#175A9C', '#3883C9', '#C5C5C5']}/> 
               </View>
             </View> : 
             <View style={{paddingVertical: 8}}>
@@ -144,7 +152,7 @@ const EstoqueTrocas = () => {
           <Text style={styles.nomesessao}>
             Estoque de Trocas
           </Text>
-        </View>
+        </View> 
         { renderTotalizadoresEstoqueTroca() }
         { renderTabelaEstoqueTroca() }
       </SafeAreaView>
