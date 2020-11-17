@@ -15,7 +15,7 @@ import { getTotalizadoresFaturamento,
   getGraficoLinhaSemanal,
   getTabelaFaturamentoSemanal } from './../../../services/home/FaturamentoApi';
 
-import GraficoFaturamento from  '../../../components/Graficos/faturamento/GraficoFaturamento';
+import GraficoFaturamento from  '../../../components/Graficos/GraficoFaturamento';
 
 import TabelaParticipacao from '../../../components/Tabelas/TabelaParticipacao';
 import BarraParticipacao from  '../../../components/Graficos/BarraParticipacao';
