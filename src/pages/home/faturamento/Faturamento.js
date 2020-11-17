@@ -20,13 +20,21 @@ import GraficoFaturamento from  '../../../components/Graficos/GraficoFaturamento
 import TabelaParticipacao from '../../../components/Tabelas/TabelaParticipacao';
 import BarraParticipacao from  '../../../components/Graficos/BarraParticipacao';
 
+import Loading from './../../../components/Loading/LoadingComponent';
+
 const Faturamento = () => {
 
   const [ valoresFaturamentoTotal, setValoresFaturamentoTotal ] = useState({});
+  const [ valoresFaturamentoComprasVendas, setValoresFaturamentoComprasVendas ] = useState({});
   const [ valoresFaturamentoVariacao, setValoresFaturamentoVariacao ] = useState({});
   const [ valoresFaturamentoGrafico, setValoresFaturamentoGrafico ] = useState({});
-  const [ valoresFaturamentoComprasVendas, setValoresFaturamentoComprasVendas ] = useState({});
   const [ valoresFaturamentoLojasSemanal, setValoresFaturamentoLojasSemanal ] = useState([]);
+
+  const [ loadingTotal, setLoadingTotal ] = useState(true);
+  const [ loadingComprasVendas, setLoadingComprasVendas ] = useState(true);
+  const [ loadingVariacao, setLoadingVariacao ] = useState(true);
+  const [ loadingGrafico, setLoadingGrafico ] = useState(true);
+  const [ loadingTabela, setLoadingTabela ] = useState(true);
   
   const load = async () => {
     await getTotalizadoresFaturamento().then((data) => {
@@ -51,16 +59,10 @@ const Faturamento = () => {
     }, (error) => {
       console.error('ERROR -> ', error);
       alert('Erro ao buscar Totalizadores do Faturamento');
+    }).then(() => {
+      setLoadingTotal(false);
     })
-
-    await getVariacaoPercentual().then((data) => {
-      let result = data.data.results;
-      setValoresFaturamentoVariacao(result[0]);
-    }, (error) => {
-      console.error('ERROR -> ', error);
-      alert('Erro ao buscar Porcentagem de Variação');
-    })
-
+    
     await getComprasVendasRedeSemanal().then((data) => {
       let result = data.data.results;
 
@@ -78,6 +80,18 @@ const Faturamento = () => {
     }, (error) => {
       console.error('ERROR -> ', error);
       alert('Erro ao buscar Totalizadores de Compras e Vendas');
+    }).then(() => {
+      setLoadingComprasVendas(false);
+    })
+
+    await getVariacaoPercentual().then((data) => {
+      let result = data.data.results;
+      setValoresFaturamentoVariacao(result[0]);
+    }, (error) => {
+      console.error('ERROR -> ', error);
+      alert('Erro ao buscar Porcentagem de Variação');
+    }).then(() => {
+      setLoadingVariacao(false);
     })
 
     await getGraficoLinhaSemanal().then((data) => {
@@ -86,6 +100,8 @@ const Faturamento = () => {
     }, (error) => {
       console.error('ERROR -> ', error);
       alert('Erro ao buscar Gráfico de Faturamento Semanal');
+    }).then(() => {
+      setLoadingGrafico(false);
     })
 
     await getTabelaFaturamentoSemanal().then((data) => {
@@ -114,7 +130,9 @@ const Faturamento = () => {
     }, (error) => {
       console.error('ERROR -> ', error);
       alert('Erro ao buscar Tabela de Faturamento Semanal');
-    })  
+    }).then(() => {
+      setLoadingTabela(false);
+    })
   }
   
   useEffect(() => {
@@ -138,32 +156,36 @@ const Faturamento = () => {
             <Text style={styles.subtitulo}>
               últimos 7 dias
             </Text>
-            <View style={{flexDirection: 'row'}}>
-            <Text style={styles.R$}>
-              R$
-            </Text>
-            <Text style={styles.valor}>
-              { valoresFaturamentoTotal.seteDias  ? <NumberFormat value={ valoresFaturamentoTotal.seteDias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> : <Text> - </Text> }
-            </Text>
+              { loadingTotal ? <Loading /> :
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.R$}>
+                  R$
+                </Text>
+                <Text style={styles.valor}>
+                  { valoresFaturamentoTotal.seteDias  ? <NumberFormat value={ valoresFaturamentoTotal.seteDias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> : <Text> - </Text> }
+                </Text>
+              </View>
+              }
           </View>
-        </View>
 
-        <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
-          <Text style={styles.subtitulo}>
-            últimos 35 dias
-          </Text>
-          <View style={{flexDirection: 'row'}}>
-            <Text style={styles.R$}>
-              R$
+          <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
+            <Text style={styles.subtitulo}>
+              últimos 35 dias
             </Text>
-            <Text style={styles.valor}>
-              { valoresFaturamentoTotal.trinaCincoDias ? <NumberFormat value={ valoresFaturamentoTotal.trinaCincoDias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> : <Text> - </Text> }
-            </Text>
+              { loadingTotal ? <Loading /> :
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.R$}>
+                  R$
+                </Text>
+                <Text style={styles.valor}>
+                  { valoresFaturamentoTotal.trinaCincoDias ? <NumberFormat value={ valoresFaturamentoTotal.trinaCincoDias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> : <Text> - </Text> }
+                </Text>
+              </View>
+              }
           </View>
-        </View>
 
+        </View>
       </View>
-    </View>
     )
   }
 
@@ -176,14 +198,16 @@ const Faturamento = () => {
         </Text>
         <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
           <Text style={styles.subtitulo}>esta semana</Text>
-          <View style={{flexDirection: 'row'}}>
-            <Text style={styles.R$}>
-              R$
-            </Text>
-            <Text style={styles.valor}>
-              { valoresFaturamentoComprasVendas.compras ? <NumberFormat value={ valoresFaturamentoComprasVendas.compras } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> : <Text> - </Text> }
-            </Text>
-          </View>
+          { loadingComprasVendas ? <Loading /> : 
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.R$}>
+                R$
+              </Text>
+              <Text style={styles.valor}>
+                { valoresFaturamentoComprasVendas.compras ? <NumberFormat value={ valoresFaturamentoComprasVendas.compras } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> : <Text> - </Text> }
+              </Text>
+            </View>
+          }
         </View>
       </View>
 
@@ -193,14 +217,16 @@ const Faturamento = () => {
         </Text>
         <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
           <Text style={styles.subtitulo}>esta semana</Text>
-          <View style={{flexDirection: 'row'}}>
-            <Text style={styles.R$}>
-              R$
-            </Text>
-            <Text style={styles.valor}>
-              { valoresFaturamentoComprasVendas.vendas ? <NumberFormat value={ valoresFaturamentoComprasVendas.vendas } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> : <Text> - </Text> }
-            </Text>
-          </View>
+          { loadingComprasVendas ? <Loading /> : 
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.R$}>
+                R$
+              </Text>
+              <Text style={styles.valor}>
+                { valoresFaturamentoComprasVendas.vendas ? <NumberFormat value={ valoresFaturamentoComprasVendas.vendas } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> : <Text> - </Text> }
+              </Text>
+            </View>
+          }
         </View>
       </View>
     </View>
@@ -216,15 +242,19 @@ const Faturamento = () => {
       <Text style={styles.subtitulo}>faturamento diário</Text>
       <View style={{flex: 1, flexDirection: 'row', marginBottom: -8, zIndex: 3}}>
           <Card size={60} icon="chevron-up" />
-          <Text style={styles.variacao}>
-            { valoresFaturamentoVariacao ?
-              <NumberFormat value={ valoresFaturamentoVariacao.fatperc2 } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> :
-              <Text>0,00</Text>
-            } %
-          </Text>
+          { loadingVariacao ? <Loading height={26} width={65} /> : 
+            <Text style={styles.variacao}>
+              { valoresFaturamentoVariacao ?
+                <NumberFormat value={ valoresFaturamentoVariacao.fatperc2 } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> :
+                <Text>0,00</Text>
+              } %
+            </Text>
+          }
       </View>
       <View style={styles.grafico2}>
-        <GraficoFaturamento valoresFaturamentoGrafico={valoresFaturamentoGrafico}/>
+        { loadingGrafico ? <Loading width={320} height={150}/> :
+          <GraficoFaturamento valoresFaturamentoGrafico={valoresFaturamentoGrafico}/>
+        }
       </View>
     </View>
     )
@@ -240,14 +270,16 @@ const Faturamento = () => {
           no faturamento total semanal
         </Text>
         <View style={styles.grafico}>
-          <BarraParticipacao           
-            valores={valoresFaturamentoLojasSemanal}
-            colors={['#021704', '#15541D', '#179C32', '#00E152',  '#C5C5C5']}/>
+          { loadingTabela ? <Loading height={42}/> : 
+            <BarraParticipacao           
+              valores={valoresFaturamentoLojasSemanal}
+              colors={['#021704', '#15541D', '#179C32', '#00E152',  '#C5C5C5']}/>
+          }
         </View>
         <View style={styles.tabela}>
-          <TabelaParticipacao 
-            valores={valoresFaturamentoLojasSemanal}
-            colors={['#021704', '#15541D', '#179C32', '#00E152',  '#C5C5C5']}/> 
+            <TabelaParticipacao 
+              valores={valoresFaturamentoLojasSemanal}
+              colors={['#021704', '#15541D', '#179C32', '#00E152',  '#C5C5C5']}/> 
         </View>
       </View>
     )

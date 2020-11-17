@@ -14,11 +14,16 @@ import { TrocasStyles as styles } from './EstoqueTrocasStyles';
 import { getTotalizadoresEstoqueTrocas, 
   getTabelaEstoqueTrocas } from '../../../services/home/TrocasApi';
 
+import Loading from './../../../components/Loading/LoadingComponent';
+
 const EstoqueTrocas = () => {
 
     const [ valoresTrocas, setValoresTrocas ] = useState({});
     const [ valoresTrocasLojasSemanal, setValoresTrocasLojasSemanal ] = useState([]);
     
+    const [ loadingTrocas, setLoadingTrocas ] = useState(true);
+    const [ loadingTabela, setLoadingTabela ] = useState(true);
+
     const load = async () => {
       await getTotalizadoresEstoqueTrocas().then((data) => {
         let result = data.data.results;
@@ -40,6 +45,8 @@ const EstoqueTrocas = () => {
       },(error) => {
         console.error('ERROR -> ', error);
         alert('Erro ao buscar Totalizadores de Trocas');
+      }).then(() => {
+        setLoadingTrocas(false);
       })
 
       await getTabelaEstoqueTrocas().then((data) => {
@@ -58,6 +65,8 @@ const EstoqueTrocas = () => {
       },(error) => {
         console.error('ERROR -> ', error);
         alert('Erro ao buscar Tabela de Trocas');
+      }).then(() => {
+        setLoadingTabela(false);
       })
     }
     
@@ -88,28 +97,32 @@ const EstoqueTrocas = () => {
             <Text style={styles.subtitulo}>
               últimos 7 dias
             </Text>
-            <View style={{flexDirection: 'row'}}>
-              <Text style={styles.R$}>
-                R$
-              </Text>
-              <Text style={styles.valor}>
-                { valoresTrocas.ultimos7dias ? <NumberFormat value={ valoresTrocas.ultimos7dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>  : <Text> - </Text> }
-              </Text>
-            </View>
+            { loadingTrocas ? <Loading/> : 
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.R$}>
+                  R$
+                </Text>
+                <Text style={styles.valor}>
+                  { valoresTrocas.ultimos7dias ? <NumberFormat value={ valoresTrocas.ultimos7dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>  : <Text> - </Text> }
+                </Text>
+              </View>
+            }
           </View>
 
           <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
             <Text style={styles.subtitulo}>
               últimos 35 dias
             </Text>
-            <View style={{flexDirection: 'row'}}>
-              <Text style={styles.R$}>
-                R$
-              </Text>
-              <Text style={styles.valor}>
-                { valoresTrocas.ultimos35dias ? <NumberFormat value={ valoresTrocas.ultimos35dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>  : <Text> - </Text> }
-              </Text>
-            </View>
+            { loadingTrocas ? <Loading/> : 
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.R$}>
+                  R$
+                </Text>
+                <Text style={styles.valor}>
+                  { valoresTrocas.ultimos35dias ? <NumberFormat value={ valoresTrocas.ultimos35dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/>  : <Text> - </Text> }
+                </Text>
+              </View>
+            }
           </View>
 
         </View>
@@ -126,7 +139,8 @@ const EstoqueTrocas = () => {
           <Text style={styles.subtitulo}>
             no envio de produtos para trocas
           </Text>
-          { valoresTrocasLojasSemanal.length > 0 ? 
+          { loadingTabela ? <Loading height={42}/> : 
+            valoresTrocasLojasSemanal.length > 0 ? 
             <View>
               <View style={styles.grafico}>
                 <BarraParticipacao 
@@ -141,7 +155,8 @@ const EstoqueTrocas = () => {
             </View> : 
             <View style={{paddingVertical: 8}}>
               <Text style={styles.textoInformativoSemDados}>Não há dados para serem exibidos!</Text>
-            </View> }
+            </View> 
+          }
         </View>
       )
     }

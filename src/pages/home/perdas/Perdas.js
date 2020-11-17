@@ -12,12 +12,17 @@ import TabelaParticipacao from  '../../../components/Tabelas/TabelaParticipacao'
 
 import { PerdasStyles as styles } from './PerdasStyles';
 import { getTotalizadoresPerdas, 
-  getTabelaPerdas } from './../../../services/home/PerdasApi'
+  getTabelaPerdas } from './../../../services/home/PerdasApi';
+
+import Loading from './../../../components/Loading/LoadingComponent';
 
 const Perdas = () => {
 
   const [ valoresPerdas, setValoresPerdas ] = useState({});
   const [ valoresPerdasLojasSemanal, setValoresPerdasLojasSemanal ] = useState([]);
+
+  const [ loadingPerdas, setLoadingPerdas ] = useState(true);
+  const [ loadingTabela, setLoadingTabela ] = useState(true);
 
   const load = async () => {
     await getTotalizadoresPerdas().then((data) => {
@@ -41,6 +46,8 @@ const Perdas = () => {
     },(error) => {
       console.error('ERROR -> ', error);
       alert('Erro ao buscar Totalizadores de Perdas');
+    }).then(() => {
+      setLoadingPerdas(false);
     })
 
     await getTabelaPerdas().then((data) => {
@@ -58,6 +65,8 @@ const Perdas = () => {
     },(error) => {
       console.error('ERROR -> ', error);
       alert('Erro ao buscar Tabela de Perdas');
+    }).then(() => {
+      setLoadingTabela(false);
     })
   }
 
@@ -82,28 +91,32 @@ const Perdas = () => {
             <Text style={styles.subtitulo}>
               últimos 7 dias
             </Text>
-            <View style={{flexDirection: 'row'}}>
-              <Text style={styles.R$}>
-                R$
-              </Text>
-              <Text style={styles.valor}>
-                { valoresPerdas.ultimos7dias ? <NumberFormat value={ valoresPerdas.ultimos7dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> : <Text> - </Text> }
-              </Text>
-            </View>
+            { loadingPerdas ? <Loading /> :
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.R$}>
+                  R$
+                </Text>
+                <Text style={styles.valor}>
+                  { valoresPerdas.ultimos7dias ? <NumberFormat value={ valoresPerdas.ultimos7dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> : <Text> - </Text> }
+                </Text>
+              </View>
+            }
           </View>
 
           <View style={{flex: 1, backgroundColor: 'white', marginTop: 5}}>
             <Text style={styles.subtitulo}>
               últimos 35 dias
             </Text>
-            <View style={{flexDirection: 'row'}}>
-              <Text style={styles.R$}>
-                R$
-              </Text>
-              <Text style={styles.valor}>
-                { valoresPerdas.ultimos35dias ? <NumberFormat value={ valoresPerdas.ultimos35dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> : <Text> - </Text> }
-              </Text>
-            </View>
+            { loadingPerdas ? <Loading /> :
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.R$}>
+                  R$
+                </Text>
+                <Text style={styles.valor}>
+                  { valoresPerdas.ultimos35dias ? <NumberFormat value={ valoresPerdas.ultimos35dias } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> : <Text> - </Text> }
+                </Text>
+              </View>
+            }
           </View>
 
       </View>
@@ -120,8 +133,8 @@ const Perdas = () => {
         <Text style={styles.subtitulo}>
           nas perdas totais semanais
         </Text>
-    
-        { valoresPerdasLojasSemanal.length > 1 ? 
+        {loadingTabela ? <Loading height={42}/> : 
+          valoresPerdasLojasSemanal.length > 1 ? 
           <View>
             <View style={styles.grafico}>
               <BarraParticipacao
@@ -136,7 +149,8 @@ const Perdas = () => {
           </View> : 
           <View style={{paddingVertical: 8}}>
             <Text style={styles.textoInformativoSemDados}>Não há dados para serem exibidos!</Text>
-          </View> }
+          </View>
+        }
       </View>
     )
   }
