@@ -99,7 +99,7 @@ const Faturamento = () => {
         });
 
         result.forEach((valor) => {
-          rows.push({nomeLoja: valor.apelidoloja, cnpj: valor.cnpjloja, valor: parseFloat(valor.faturamento7dd), porcentagem: (parseFloat(valor.faturamento7dd) / total)});
+          rows.push({nomeLoja: valor.apelidoloja, cnpj: valor.cnpjloja, valor: parseFloat(valor.faturamento7dd), porcentagem: ((parseFloat(valor.faturamento7dd) / total) * 100)});
         })
       }
 
@@ -210,18 +210,18 @@ const Faturamento = () => {
   const renderVariacaoPercentual = () => {
     return(
       <View style={styles.cardVariacaoPercentual}>
-      <Text style={styles.titulocard}>
-        Variação Percentual
-      </Text>
+        <Text style={styles.titulocard}>
+          Variação Percentual
+        </Text>
       <Text style={styles.subtitulo}>faturamento diário</Text>
       <View style={{flex: 1, flexDirection: 'row', marginBottom: -8, zIndex: 3}}>
-        <Card size={60} icon="chevron-up" />
-        <Text style={styles.variacao}>
-          { valoresFaturamentoVariacao ?
-            <NumberFormat value={ valoresFaturamentoVariacao.fatperc2 } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> :
-            <Text>0,00</Text>
-          } %
-        </Text>
+          <Card size={60} icon="chevron-up" />
+          <Text style={styles.variacao}>
+            { valoresFaturamentoVariacao ?
+              <NumberFormat value={ valoresFaturamentoVariacao.fatperc2 } renderText={value => <Text>{value}</Text>} isNumericString = {true} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} decimalScale={2} fixedDecimalScale={true}/> :
+              <Text>0,00</Text>
+            } %
+          </Text>
       </View>
       <View style={styles.grafico2}>
         <GraficoFaturamento valoresFaturamentoGrafico={valoresFaturamentoGrafico}/>
