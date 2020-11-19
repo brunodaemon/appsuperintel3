@@ -38,7 +38,6 @@ const Faturamento = () => {
   
   const load = async () => {
     await getTotalizadoresFaturamento().then((data) => {
-      console.log(data);
       let result = data.data.results;
       var totaisFaturamento = {
         seteDias: 0,

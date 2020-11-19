@@ -6,13 +6,18 @@ import CustomDrawer from './src/components/Drawer';
 
 import Home from './src/pages/home/Home'
 
-const Routes = createAppContainer(
-  createDrawerNavigator({
-    Home,
-  }, {
-    initialRoutName: 'Home',
-    contentComponent: CustomDrawer
-  })
-);
+import { withAuthenticator } from 'aws-amplify-react-native'
 
-export default Routes;
+import Amplify from '@aws-amplify/core'
+import config from './aws-exports'
+Amplify.configure(config)
+
+class App extends React.Component {
+  render() {
+    return (
+      <Home />
+    );
+  }
+}
+
+export default withAuthenticator( App, { includeGreetings: false })

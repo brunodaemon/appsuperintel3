@@ -9,7 +9,7 @@ import EstoqueTrocas from './estoqueTrocas/EstoqueTrocas';
 
 import { HomeStyles as styles } from './HomeStyles';
 
-export default function Home() {
+const Home = () => {
     let nomeRede = `Casa Fiesta`;
 
     return(
@@ -25,3 +25,5 @@ export default function Home() {
       )
 
 }
+
+export default Home;
